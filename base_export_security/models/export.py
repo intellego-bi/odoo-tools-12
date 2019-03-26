@@ -4,6 +4,9 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
 from odoo import _, api, fields, models
+# Insert Intellego-BI
+from odoo.exceptions import UserError, ValidationError
+
 
 
 class Export(models.Model):
@@ -40,10 +43,13 @@ class Export(models.Model):
         user = self.env.user
         name_data = {'date': date, 'model': model.name, 'user': user.name}
         name = '%(date)s / %(model)s / %(user)s' % name_data
+        raise UserError(_(
+                    'Field Names %s.') % field_names)
+
         exported_fields = self.env['ir.model.fields'].search([
             ('model', '=', model_name),
             #('name', 'in', field_names),
-            ('name', 'in', field_names.ids),
+            #('name', 'in', field_names.ids),
         ])
         records = self.env['ir.model.data'].search([
             ('model', '=', model_name),
