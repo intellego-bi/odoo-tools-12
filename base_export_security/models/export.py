@@ -42,7 +42,8 @@ class Export(models.Model):
         name = '%(date)s / %(model)s / %(user)s' % name_data
         exported_fields = self.env['ir.model.fields'].search([
             ('model', '=', model_name),
-            ('name', 'in', field_names),
+            #('name', 'in', field_names),
+            ('name', 'in', field_names.id),
         ])
         records = self.env['ir.model.data'].search([
             ('model', '=', model_name),
