@@ -13,9 +13,9 @@
                                 <field name="name"/>
                             </h1>
                             <label for="external_order" class="oe_edit_only"/>
-                            <h2>
+                            <h3>
                                 <field name="external_order"/>
-                            </h2>
+                            </h3>
                         </div>
                     </group>
                     <group>
@@ -29,6 +29,8 @@
                         <group>
                             <field name="active" />
                             <field name="company_id"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>                            
                         </group>
                     </group>
                     <group>

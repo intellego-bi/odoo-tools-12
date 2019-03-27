@@ -29,3 +29,6 @@ class SaleBlanketOrder(models.Model):
     payment_term_id = fields.Many2one('account.payment.term', 'Payment Term')
     pricelist_id = fields.Many2one('product.pricelist', 'Pricelist')
     incoterm_id = fields.Many2one('account.incoterms', 'Incoterm')
+    date_from = fields.Date(string="Valid From", default=fields.Date.today(), readonly=False)
+    date_to = fields.Date(string="Valid To", default=fields.Date.today(), readonly=False)
+
