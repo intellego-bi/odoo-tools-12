@@ -26,7 +26,14 @@ class SaleOrder(models.Model):
     blanket_id = fields.Many2one(
         comodel_name='sale.order.blanket',
         string='Blanket Sale Order')
-            
+
+    allowed_partner_category_ids = fields.Many2many(string="Partner Categories",
+                                                    comodel_name='res.partner.category',
+                                                    relation='cl_blanket_partner_category_rel',
+                                                    column1='sale_order_blanket_id',
+                                                    column2='category_id',
+                                                    readonly=True)
+        
     @api.multi
     @api.onchange('partner_id')
     def onchange_partner_id(self):
