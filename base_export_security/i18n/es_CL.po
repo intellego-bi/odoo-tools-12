@@ -23,7 +23,7 @@ msgid "\n            The user will be able to export data."
 msgstr "\n            El usuario podrá realizar la exportación de registros en Odoo."
 
 #. module: base_export_security
-#: code:addons/base_export_security/models/export.py:81
+#: code:addons/base_export_security/models/export.py:82
 #, python-format
 msgid "%(records)d <b>%(model)s</b> records exported by <b>%(user)s</b>.<br><b>Fields exported:</b> %(fields)s"
 msgstr "%(records)d <b>%(model)s</b> registros exportados por <b>%(user)s</b>.<br><b>Campos Exportados:</b> %(fields)s"

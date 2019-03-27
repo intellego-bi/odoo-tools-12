@@ -37,7 +37,8 @@ class Export(models.Model):
 
     @api.model
     def log_export(self, recordset, field_names):
-        date = fields.Datetime.now()
+        #date = fields.Datetime.now()
+        date = fields.Datetime.now(tz.gettz('America/Santiago'))        
         model_name = recordset._name
         model = self.env['ir.model'].search([('model', '=', model_name)])
         user = self.env.user
