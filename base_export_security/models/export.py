@@ -5,8 +5,8 @@
 
 from odoo import _, api, fields, models
 # Insert Intellego-BI
+import pytz
 #from odoo.exceptions import UserError, ValidationError
-
 
 
 class Export(models.Model):
@@ -36,9 +36,21 @@ class Export(models.Model):
     )
 
     @api.model
+    def _get_datetime_user_tz(self):
+        user = self.env['res.users'].browse(self.env.uid)
+        # Users timezone
+        if user.tz:
+            tz = pytz.timezone(user.tz) or pytz.utc
+            user_time = pytz.utc.localize(datetime.now()).astimezone(tz)
+        else:
+            user_time = datetime.now()
+        return user_time   
+    
+    
+    @api.model
     def log_export(self, recordset, field_names):
         #date = fields.Datetime.now()
-        date = fields.Datetime.now(tz.gettz('America/Santiago'))        
+        date = fields._get_datetime_user_tz()        
         model_name = recordset._name
         model = self.env['ir.model'].search([('model', '=', model_name)])
         user = self.env.user
