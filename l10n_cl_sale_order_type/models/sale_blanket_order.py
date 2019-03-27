@@ -24,7 +24,7 @@ class SaleBlanketOrder(models.Model):
     #    domain=_get_domain_sequence_id)
 
     company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.user.company_id, readonly=True)
-    partner_id = fields.Many2one('res.partner', 'Partner', required=True)
+    partner_id = fields.Many2one('res.partner', 'Partner', required=False)
     sale_order_type_id = fields.Many2one('sale.order.type', 'Sale Order Type')
     payment_term_id = fields.Many2one('account.payment.term', 'Payment Term')
     pricelist_id = fields.Many2one('product.pricelist', 'Pricelist')
