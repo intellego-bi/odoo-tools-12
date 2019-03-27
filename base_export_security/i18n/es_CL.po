@@ -2,18 +2,15 @@
 # This file contains the translation of the following modules:
 # * base_export_security
 #
-# Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2017
+
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 12.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-16 02:16+0000\n"
-"PO-Revision-Date: 2017-12-16 02:16+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Spanish (Chile) (https://www.transifex.com/oca/teams/23907/"
-"es_CL/)\n"
-"Language: es_CL\n"
+"POT-Creation-Date: 2019-03-27 00:06+0000\n"
+"PO-Revision-Date: 2019-03-27 00:06+0000\n"
+"Last-Translator: Rodolfo Bermúdez Neubauer <odoo@intellego-bi.com>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -26,6 +23,9 @@ msgid ""
 "            The user will be able to export data.\n"
 "        "
 msgstr ""
+"\n"
+"            El usuario podrá realizar la exportación de registros en Odoo.\n"
+"        "
 
 #. module: base_export_security
 #: code:addons/base_export_security/models/export.py:72
@@ -34,6 +34,8 @@ msgid ""
 "%(records)d <b>%(model)s</b> records exported by <b>%(user)s</b>."
 "<br><b>Fields exported:</b> %(fields)s"
 msgstr ""
+"%(records)d <b>%(model)s</b> registros exportados por <b>%(user)s</b>."
+"<br><b>Campos Exportados:</b> %(fields)s"
 
 #. module: base_export_security
 #: code:addons/base_export_security/tests/test_export.py:89
@@ -42,6 +44,8 @@ msgid ""
 "<p>%(records)d <b>%(model)s</b> records exported by <b>%(user)s</b>."
 "<br><b>Fields exported:</b> %(fields)s</p>"
 msgstr ""
+"<p>%(records)d <b>%(model)s</b> registros exportados por <b>%(user)s</b>."
+"<br><b>Campos Exportados:</b> %(fields)s</p>"
 
 #. module: base_export_security
 #: model:ir.model.fields,field_description:base_export_security.field_export_event_create_uid
@@ -51,12 +55,12 @@ msgstr "Creado por"
 #. module: base_export_security
 #: model:ir.model.fields,field_description:base_export_security.field_export_event_create_date
 msgid "Created on"
-msgstr "Creado en"
+msgstr "Creado el"
 
 #. module: base_export_security
 #: model:ir.model,name:base_export_security.model_export_event
 msgid "Data Export Record"
-msgstr ""
+msgstr "Registro de Datos Exportado"
 
 #. module: base_export_security
 #: model:ir.ui.menu,name:base_export_security.export_category
@@ -66,26 +70,26 @@ msgstr ""
 #. module: base_export_security
 #: model:ir.model.fields,field_description:base_export_security.field_export_event_display_name
 msgid "Display Name"
-msgstr "Nombre mostrado"
+msgstr "Nombre a Mostrar"
 
 #. module: base_export_security
 #. openerp-web
 #: code:addons/base_export_security/static/src/js/base_export_security.js:13
 #, python-format
 msgid "Export"
-msgstr ""
+msgstr "Exportar"
 
 #. module: base_export_security
 #: model:ir.ui.view,arch_db:base_export_security.export_view_form
 #: model:ir.ui.view,arch_db:base_export_security.export_view_search
 #: model:ir.ui.view,arch_db:base_export_security.export_view_tree
 msgid "Export Date"
-msgstr ""
+msgstr "Fecha Export"
 
 #. module: base_export_security
 #: model:ir.ui.view,arch_db:base_export_security.export_view_form
 msgid "Export Log"
-msgstr ""
+msgstr "Log Export"
 
 #. module: base_export_security
 #: model:ir.actions.act_window,name:base_export_security.export_action_log
@@ -93,34 +97,34 @@ msgstr ""
 #: model:ir.ui.view,arch_db:base_export_security.export_view_search
 #: model:ir.ui.view,arch_db:base_export_security.export_view_tree
 msgid "Export Logs"
-msgstr ""
+msgstr "Logs Export"
 
 #. module: base_export_security
 #: model:res.groups,name:base_export_security.export_group
 msgid "Export Rights"
-msgstr ""
+msgstr "Permisos Export"
 
 #. module: base_export_security
 #: model:ir.model.fields,field_description:base_export_security.field_export_event_field_ids
 #: model:ir.ui.view,arch_db:base_export_security.export_view_form
 msgid "Exported Fields"
-msgstr ""
+msgstr "Campos Exportados"
 
 #. module: base_export_security
 #: model:ir.model.fields,field_description:base_export_security.field_export_event_model_id
 msgid "Exported Model"
-msgstr ""
+msgstr "Modelo Exportado"
 
 #. module: base_export_security
 #: model:ir.model.fields,field_description:base_export_security.field_export_event_record_ids
 #: model:ir.ui.view,arch_db:base_export_security.export_view_form
 msgid "Exported Records"
-msgstr ""
+msgstr "Registros Exportados"
 
 #. module: base_export_security
 #: model:ir.model.fields,field_description:base_export_security.field_export_event_user_id
 msgid "Exported by"
-msgstr ""
+msgstr "Exportado por"
 
 #. module: base_export_security
 #: model:ir.model.fields,field_description:base_export_security.field_export_event_id
@@ -130,17 +134,17 @@ msgstr "ID (identificación)"
 #. module: base_export_security
 #: model:ir.model.fields,field_description:base_export_security.field_export_event___last_update
 msgid "Last Modified on"
-msgstr "Última modificación en"
+msgstr "Modificado el"
 
 #. module: base_export_security
 #: model:ir.model.fields,field_description:base_export_security.field_export_event_write_uid
 msgid "Last Updated by"
-msgstr "Última actualización de"
+msgstr "Actualizado por"
 
 #. module: base_export_security
 #: model:ir.model.fields,field_description:base_export_security.field_export_event_write_date
 msgid "Last Updated on"
-msgstr "Última actualización en"
+msgstr "Actualizado el"
 
 #. module: base_export_security
 #: model:ir.model.fields,field_description:base_export_security.field_export_event_name
@@ -151,7 +155,7 @@ msgstr "Nombre"
 #: code:addons/base_export_security/models/base.py:25
 #, python-format
 msgid "You do not have permission to export data"
-msgstr ""
+msgstr "Su usuario no tiene permisos para Exportar datos en Odoo"
 
 #. module: base_export_security
 #: model:ir.model,name:base_export_security.model_base
