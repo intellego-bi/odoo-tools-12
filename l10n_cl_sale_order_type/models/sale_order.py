@@ -9,9 +9,9 @@ class SaleOrder(models.Model):
     def _get_order_type(self):
         return self.env['sale.order.type'].search([], limit=1)
 
-    def _get_customer_for_categories(self):
-        customer_ids = return self.env['sale.order.type']
-        return res    
+    #def _get_customer_for_categories(self):
+    #    customer_ids = return self.env['sale.order.type']
+    #    return res    
 
     def domain_partner_id(self):
         domain = []
