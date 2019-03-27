@@ -9,6 +9,17 @@ class SaleOrder(models.Model):
     def _get_order_type(self):
         return self.env['sale.order.type'].search([], limit=1)
 
+    def _get_customer_for_categories(self):
+        customer_ids = return self.env['sale.order.type']
+        return res    
+
+    def domain_partner_id(self):
+        domain = []
+        for order in self:
+            if order.blanket_id.filtered_partner_category_ids:
+                domain = [('category_id', 'in', order.blanket_id.filtered_partner_category_ids.ids)] 
+        return domain        
+        
     type_id = fields.Many2one(
         comodel_name='sale.order.type', string='Type', default=_get_order_type)
 
@@ -72,4 +83,6 @@ class SaleOrder(models.Model):
             res['journal_id'] = self.type_id.journal_id.id
         if self.type_id:
             res['sale_type_id'] = self.type_id.id
+        if self.blanket_id:
+            res['sale_blanket_id'] = self.blanket_id.id
         return res
