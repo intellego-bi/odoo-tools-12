@@ -12,6 +12,7 @@
  'data': ['import_export_sale_order/actions.xml',
           'import_export_sale_order/templates.xml',
           'report_sale_order/report_sale_order.xml',
+          'report_sale_order/report_sale_order_line.xml',
           'report_sale_order/templates.xml',
           'import_sale_orders/menu_action.xml',
           'import_sale_orders/templates.xml',

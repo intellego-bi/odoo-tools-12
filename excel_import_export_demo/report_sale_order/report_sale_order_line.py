@@ -4,9 +4,9 @@
 from odoo import models, fields, api
 
 
-class ReportSaleOrder(models.TransientModel):
-    _name = 'report.sale.order'
-    _description = 'Wizard for report.sale.order'
+class ReportSaleOrderLine(models.TransientModel):
+    _name = 'report.sale.order.line'
+    _description = 'Wizard for report.sale.order.line'
     _inherit = 'xlsx.report'
 
     # Search Criteria
@@ -16,7 +16,7 @@ class ReportSaleOrder(models.TransientModel):
     )
     # Report Result, sale.order
     results = fields.Many2many(
-        'sale.order',
+        'sale.order.line',
         string='Results',
         compute='_compute_results',
         help='Use compute fields, so there is nothing stored in database',
@@ -28,7 +28,7 @@ class ReportSaleOrder(models.TransientModel):
         before export to excel, by using xlsx.export
         """
         self.ensure_one()
-        Result = self.env['sale.order']
+        Result = self.env['sale.order.line']
         domain = []
         if self.partner_id:
             domain += [('partner_id', '=', self.partner_id.id)]

@@ -33,4 +33,35 @@
         <value eval="[ref('report_sale_order_template')]"/>
     </function>
 
+    <record id="report_sale_order_line_template" model="xlsx.template">
+        <field name="res_model">report.sale.order.line</field>
+        <field name="fname">report_sale_order_line.xlsx</field>
+        <field name="name">Report Sale Order Line Template</field>
+        <field name="description">Sample Report Sales Order Line Template</field>
+        <field name="input_instruction">
+            {
+                '__EXPORT__': {
+                    1: {
+                        '_HEAD_': {
+                            'B2': 'order_id.name${value or ""}#{align=left;style=text}',
+                        },
+                        'results': {
+                            'A5': 'order_id.origin${value or ""}#{style=text}',
+                            'B5': 'order_id.confirmation_date${value or ""}#{style=date}',
+                            'C5': 'product_id.name${value or ""}#{style=text}',
+                            'D5': 'order_id.amount_untaxed${value or 0}#{style=number}@{sum}',
+                            'E5': 'order_id.amount_tax${value or 0}#{style=number}@{sum}',
+                            'F5': 'order_id.amount_total${value or 0}#{style=number}@{sum}',
+                        },
+                    },
+                },
+            }
+        </field>
+    </record>
+
+    <function model="xlsx.template" name="load_xlsx_template">
+        <value eval="[ref('report_sale_order_template')]"/>
+    </function>
+    
+    
 </odoo>
