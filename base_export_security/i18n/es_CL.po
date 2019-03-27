@@ -18,34 +18,23 @@ msgstr ""
 
 #. module: base_export_security
 #: model:res.groups,comment:base_export_security.export_group
-msgid ""
-"\n"
+msgid "\n"
 "            The user will be able to export data.\n"
 "        "
-msgstr ""
-"\n"
+msgstr "\n"
 "            El usuario podrá realizar la exportación de registros en Odoo.\n"
 "        "
-
 #. module: base_export_security
-#: code:addons/base_export_security/models/export.py:72
+#: code:addons/base_export_security/models/export.py:81
 #, python-format
-msgid ""
-"%(records)d <b>%(model)s</b> records exported by <b>%(user)s</b>."
-"<br><b>Fields exported:</b> %(fields)s"
-msgstr ""
-"%(records)d <b>%(model)s</b> registros exportados por <b>%(user)s</b>."
-"<br><b>Campos Exportados:</b> %(fields)s"
+msgid "%(records)d <b>%(model)s</b> records exported by <b>%(user)s</b>.<br><b>Fields exported:</b> %(fields)s"
+msgstr "%(records)d <b>%(model)s</b> registros exportados por <b>%(user)s</b>.<br><b>Campos Exportados:</b> %(fields)s"
 
 #. module: base_export_security
 #: code:addons/base_export_security/tests/test_export.py:89
 #, python-format
-msgid ""
-"<p>%(records)d <b>%(model)s</b> records exported by <b>%(user)s</b>."
-"<br><b>Fields exported:</b> %(fields)s</p>"
-msgstr ""
-"<p>%(records)d <b>%(model)s</b> registros exportados por <b>%(user)s</b>."
-"<br><b>Campos Exportados:</b> %(fields)s</p>"
+msgid "<p>%(records)d <b>%(model)s</b> records exported by <b>%(user)s</b>.<br><b>Fields exported:</b> %(fields)s</p>"
+msgstr "<p>%(records)d <b>%(model)s</b> registros exportados por <b>%(user)s</b>.<br><b>Campos Exportados:</b> %(fields)s</p>"
 
 #. module: base_export_security
 #: model:ir.model.fields,field_description:base_export_security.field_export_event_create_uid
