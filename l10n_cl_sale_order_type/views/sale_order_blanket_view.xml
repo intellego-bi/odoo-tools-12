@@ -28,7 +28,7 @@
                         </group>
                         <group>
                             <field name="active" />
-                            <field name="company_id" attrs="{'invisible': [('1', '=', '2')]}"/>
+                            <field name="company_id"/>
                         </group>
                     </group>
                     <group>
