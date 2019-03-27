@@ -31,7 +31,7 @@ msgid "%(records)d <b>%(model)s</b> records exported by <b>%(user)s</b>.<br><b>F
 msgstr "%(records)d <b>%(model)s</b> registros exportados por <b>%(user)s</b>.<br><b>Campos Exportados:</b> %(fields)s"
 
 #. module: base_export_security
-#: code:addons/base_export_security/tests/test_export.py:89
+#: code:addons/base_export_security/tests/test_export.py:91
 #, python-format
 msgid "<p>%(records)d <b>%(model)s</b> records exported by <b>%(user)s</b>.<br><b>Fields exported:</b> %(fields)s</p>"
 msgstr "<p>%(records)d <b>%(model)s</b> registros exportados por <b>%(user)s</b>.<br><b>Campos Exportados:</b> %(fields)s</p>"
@@ -141,7 +141,7 @@ msgid "Name"
 msgstr "Nombre"
 
 #. module: base_export_security
-#: code:addons/base_export_security/models/base.py:25
+#: code:addons/base_export_security/models/base.py:26
 #, python-format
 msgid "You do not have permission to export data"
 msgstr "Su usuario no tiene permisos para Exportar datos en Odoo"
