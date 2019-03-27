@@ -9,16 +9,6 @@ class SaleOrder(models.Model):
     def _get_order_type(self):
         return self.env['sale.order.type'].search([], limit=1)
 
-    #def _get_customer_for_categories(self):
-    #    customer_ids = return self.env['sale.order.type']
-    #    return res    
-
-    def domain_partner_id(self):
-        domain = []
-        for order in self:
-            if order.blanket_id.filtered_partner_category_ids:
-                domain = [('category_id', 'in', order.blanket_id.filtered_partner_category_ids.ids)] 
-        return domain        
         
     type_id = fields.Many2one(
         comodel_name='sale.order.type', string='Type', default=_get_order_type)
@@ -26,14 +16,17 @@ class SaleOrder(models.Model):
     blanket_id = fields.Many2one(
         comodel_name='sale.order.blanket',
         string='Blanket Sale Order')
-
-    allowed_partner_category_ids = fields.Many2many(string="Partner Categories",
+    
+    blanket_partner_category_ids = fields.Many2many(string='Partner Categories',
+                                                    related='blanket_id.partner_category_ids',
+                                                    readonly=True, 
+                                                    store=True,
                                                     comodel_name='res.partner.category',
                                                     relation='cl_blanket_partner_category_rel',
                                                     column1='sale_order_blanket_id',
-                                                    column2='category_id',
-                                                    readonly=True)
-        
+                                                    column2='category_id')
+
+    
     @api.multi
     @api.onchange('partner_id')
     def onchange_partner_id(self):
@@ -57,8 +50,7 @@ class SaleOrder(models.Model):
                 order.incoterm = order.blanket_id.incoterm_id.id
             if order.blanket_id.partner_id:
                 order.partner_id = order.blanket_id.partner_id.id
-    
-        
+     
             
     @api.multi
     @api.onchange('type_id')

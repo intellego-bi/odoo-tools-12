@@ -21,8 +21,8 @@
                     <group>
                         <group>
                             <field name="partner_id" />
-                            <field name="filtered_partner_category_ids" widget="many2many_tags"/>
-                            <field name="filtered_product_category_ids" widget="many2many_tags"/>
+                            <field name="partner_category_ids" widget="many2many_tags"/>
+                            <field name="product_category_ids" widget="many2many_tags"/>
                             <field name="sale_order_type_id" />
                             <field name="pricelist_id" />
                             <field name="payment_term_id" />

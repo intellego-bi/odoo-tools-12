@@ -26,12 +26,12 @@ class SaleBlanketOrder(models.Model):
     company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.user.company_id, readonly=True)
 
     partner_id = fields.Many2one('res.partner', 'Partner', required=False)
-    filtered_partner_category_ids = fields.Many2many(string="Allowed Partner Categories",
+    partner_category_ids = fields.Many2many(string="Allowed Partner Categories",
                                                     comodel_name='res.partner.category',
                                                     relation='cl_blanket_partner_category_rel',
                                                     column1='sale_order_blanket_id',
                                                     column2='category_id')
-    filtered_product_category_ids = fields.Many2many(string="Allowed Product Categories",
+    product_category_ids = fields.Many2many(string="Allowed Product Categories",
                                                     comodel_name='product.public.category',
                                                     relation='cl_blanket_product_public_category_rel',
                                                     column1='sale_order_blanket_id',
