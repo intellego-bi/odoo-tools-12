@@ -12,6 +12,10 @@ class SaleOrder(models.Model):
     type_id = fields.Many2one(
         comodel_name='sale.order.type', string='Type', default=_get_order_type)
 
+    blanket_id = fields.Many2one(
+        comodel_name='sale.order.blanket',
+        string='Blanket Sale Order')
+            
     @api.multi
     @api.onchange('partner_id')
     def onchange_partner_id(self):
@@ -21,6 +25,20 @@ class SaleOrder(models.Model):
         if sale_type:
             self.type_id = sale_type
 
+    @api.multi
+    @api.onchange('blanket_id')
+    def onchange_blanket_id(self):
+        for order in self:
+            if order.blanket_id.type_id:
+                order.type_id = order.blanket_id.type_id
+            if order.blanket_id.payment_term_id:
+                order.payment_term_id = order.blanket_id.payment_term_id.id
+            if order.blanket_id.pricelist_id:
+                order.pricelist_id = order.blanket_id.pricelist_id.id
+            if order.blanket_id.incoterm_id:
+                order.incoterm = order.blanket_id.incoterm_id.id
+        
+            
     @api.multi
     @api.onchange('type_id')
     def onchange_type_id(self):
