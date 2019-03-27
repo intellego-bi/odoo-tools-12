@@ -44,7 +44,7 @@ class Export(models.Model):
         name_data = {'date': date, 'model': model.name, 'user': user.name}
         name = '%(date)s / %(model)s / %(user)s' % name_data
         raise UserError(_(
-                    'Field Names %s.') % field_names)
+                    'Field Names %s.') % list(field_names))
 
         exported_fields = self.env['ir.model.fields'].search([
             ('model', '=', model_name),
