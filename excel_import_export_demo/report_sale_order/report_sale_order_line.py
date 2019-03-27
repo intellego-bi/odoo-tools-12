@@ -32,7 +32,7 @@ class ReportSaleOrderLine(models.TransientModel):
         domain = []
         if self.partner_id:
             sale_orders = self.env['sale.order'].search([('partner_id', '=', self.partner_id.id)])
-            domain += [('order_id', 'in', sale_orders)]
+            domain += [('order_id', 'in', list(sale_orders))]
             #for sale_order in sale_orders:
                 #domain += [('order_id', '=', sale_order.id)]
         self.results = Result.search(domain)
