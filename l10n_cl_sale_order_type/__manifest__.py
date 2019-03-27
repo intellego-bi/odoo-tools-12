@@ -4,13 +4,15 @@
 # Copyright 2016 Lorenzo Battistini
 # Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # Copyright 2018 David Vidal <david.vidal@tecnativa.com>
+# Copyright 2019 Intellego-BI.com <odoo@intellego-bi.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Sale Order Type",
-    "version": "12.0.1.0.0",
+    "name": "CL - Sale Order Type",
+    "version": "12.0.1.0.1",
     "category": "Sales Management",
-    "author": "Grupo Vermon,"
+    "author": "Intellego-BI.com",
+              "Grupo Vermon,"
               "AvanzOSC,"
               "Tecnativa,"
               "Agile Business Group,"
@@ -33,7 +35,7 @@
         "views/sale_order_type_view.xml",
         "views/account_invoice_view.xml",
         "views/res_partner_view.xml",
-        "data/default_type.xml",
+        "data/default_sale_order_type.xml",
     ],
     'installable': True,
 }

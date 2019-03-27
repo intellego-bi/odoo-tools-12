@@ -5,7 +5,7 @@
         <field name="model">account.invoice</field>
         <field name="inherit_id" ref="account.invoice_form"/>
         <field name="arch" type="xml">
-            <field name="payment_term_id" position="after">
+            <field name="payment_term_id" position="before">
                 <field name="sale_type_id"/>
             </field>
         </field>

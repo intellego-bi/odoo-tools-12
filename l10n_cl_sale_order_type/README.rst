@@ -112,6 +112,10 @@ Contributors
   * Angel Moya Pardo <angel.moya@pesol.es>
   * Antonio J Rubio Lorente <antonio.rubio@pesol.es>
 
+* `Intellego-BI <https://www.Intellego-BI.com>`_
+
+  * Rodolfo Bermúdez Neubauer <odoo@Intellego-BI.com>
+
 Do not contact contributors directly about support or help with technical issues.
 
 Maintainers
