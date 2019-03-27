@@ -29,8 +29,8 @@ class SaleOrder(models.Model):
     @api.onchange('blanket_id')
     def onchange_blanket_id(self):
         for order in self:
-            if order.blanket_id.type_id:
-                order.type_id = order.blanket_id.type_id
+            if order.blanket_id.sale_order_type_id:
+                order.type_id = order.blanket_id.sale_order_type_id
             if order.blanket_id.payment_term_id:
                 order.payment_term_id = order.blanket_id.payment_term_id.id
             if order.blanket_id.pricelist_id:
