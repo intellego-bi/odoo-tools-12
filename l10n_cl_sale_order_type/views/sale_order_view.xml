@@ -14,7 +14,6 @@
             </field>
             <field name="payment_term_id" position="after">
                 <field name="blanket_partner_category_ids" string="Partner Categories" widget="many2many_tags" invisible="False"/>
-                <field name="x_studio_filtered_partner_categories" string="Filtered Partner Categories" invisible="True"/>
             </field>
         </field>
     </record>
