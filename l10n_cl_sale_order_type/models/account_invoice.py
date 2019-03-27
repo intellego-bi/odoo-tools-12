@@ -25,6 +25,14 @@ class AccountInvoice(models.Model):
         if sale_type:
             self.sale_type_id = sale_type
 
+    @api.onchange('sale_blanket_id')
+    def onchange_sale_blanket_id(self):
+        if self.sale_blanket_id.payment_term_id:
+            self.payment_term = self.sale_blanket_id.payment_term_id.id
+        if self.sale_blanket_id.partner_id:
+            self.partner_id = self.sale_blanket_id.partner_id.id
+            
+            
     @api.onchange('sale_type_id')
     def onchange_sale_type_id(self):
         if self.sale_type_id.payment_term_id:

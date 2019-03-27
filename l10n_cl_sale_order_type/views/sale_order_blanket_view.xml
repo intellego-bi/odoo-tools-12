@@ -12,7 +12,7 @@
                             <h1>
                                 <field name="name"/>
                             </h1>
-                            <label for="external_order" class="oe_edit_only"/>
+                            <label for="external_order"/>
                             <h3>
                                 <field name="external_order"/>
                             </h3>
@@ -34,7 +34,7 @@
                         </group>
                     </group>
                     <group>
-                        <label for="description" class="oe_edit_only"/>
+                        <label for="description"/>
                         <h2>
                             <field name="description"/>
                         </h2>                            
