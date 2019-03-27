@@ -35,22 +35,17 @@ class Export(models.Model):
         readonly=True,
     )
 
+    
     @api.model
-    def _get_datetime_user_tz(self):
+    def log_export(self, recordset, field_names):        
+        #date = fields.Datetime.now()
         user = self.env['res.users'].browse(self.env.uid)
-        # Users timezone
+        # Odoo User's Timezone
         if user.tz:
             tz = pytz.timezone(user.tz) or pytz.utc
-            user_time = pytz.utc.localize(datetime.now()).astimezone(tz)
+            date = pytz.utc.localize(fields.Datetime.now()).astimezone(tz)
         else:
-            user_time = datetime.now()
-        return user_time   
-    
-    
-    @api.model
-    def log_export(self, recordset, field_names):
-        #date = fields.Datetime.now()
-        date = fields._get_datetime_user_tz()        
+            date = fields.Datetime.now()
         model_name = recordset._name
         model = self.env['ir.model'].search([('model', '=', model_name)])
         user = self.env.user
