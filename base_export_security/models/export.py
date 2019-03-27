@@ -43,7 +43,7 @@ class Export(models.Model):
         # Odoo User's Timezone
         if user.tz:
             tz = pytz.timezone(user.tz) or pytz.utc
-            date = pytz.utc.localize(fields.Datetime.now()).astimezone(tz)
+            date = pytz.utc.localize(fields.Datetime.now()).astimezone(tz).replace(tzinfo=None)
         else:
             date = fields.Datetime.now()
         model_name = recordset._name
