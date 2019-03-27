@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <field name="pricelist_id" position="before">
                 <field name="type_id" required="0"/>
-                <field name="blanket_id" attrs="{'invisible': [('type_id', '=', 1)]}"/>
+                <!--<field name="blanket_id" attrs="{'invisible': [('type_id', '=', 1)]}"/>-->
             </field>
         </field>
     </record>
