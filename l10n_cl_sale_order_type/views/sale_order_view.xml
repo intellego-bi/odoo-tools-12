@@ -16,7 +16,8 @@
                 <attribute name="attrs">{"required": [["type_id","=",2]]}</attribute>
             </field>
             <field name="blanket_partner_category_ids" position="attributes">
-                <attribute name="attrs">{"invisible": [["blanket_id.partner_category_ids","=","[]"]]}</attribute>
+                <!-- TODO: Categorás sólo visibles se existen en Blanket -->
+                <attribute name="attrs">{"invisible": [["type_id","=",1]]}</attribute>
             </field>
             <field name="partner_id" position="attributes">
                 <attribute name="domain">["&amp;",["customer","=",True],["category_id","in","blanket_partner_category_ids"]]</attribute>
