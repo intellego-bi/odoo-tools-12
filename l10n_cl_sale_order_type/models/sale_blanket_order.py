@@ -13,7 +13,7 @@ class SaleBlanketOrder(models.Model):
 
     @api.model
     def _get_default_date_end(self):
-        end_date = Date.today() + timedelta(years=1)
+        end_date = today() + timedelta(years=1)
         return end_date
     
 
