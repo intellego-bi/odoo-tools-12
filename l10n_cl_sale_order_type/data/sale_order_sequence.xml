@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright 2019 Intellego-BI.com
+  License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html)
+ -->
+<odoo noupdate="1">
+        
+        <!-- Sales Order Sequences  -->
+
+        <record id="cl_sequence_sale_normal" model="ir.sequence">
+            <field name="name">NVNA Pedido Venta Normal (Secuencia)</field>
+            <field name="prefix">NVNA/%(range_year)s/</field>
+            <field eval="100000" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+            <field eval="True" name="use_date_range"/>
+            <field eval="1" name="company_id"/>
+            <field name="padding">6</field>
+        </record>
+
+        <record id="cl_sequence_sale_export" model="ir.sequence">
+            <field name="name">NVEX Pedido Venta Exportación (Secuencia)</field>
+            <field name="prefix">NVEX/%(range_year)s/</field>
+            <field eval="200000" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+            <field eval="True" name="use_date_range"/>
+            <field eval="1" name="company_id"/>
+            <field name="padding">6</field>
+        </record>
+
+        <record id="cl_sequence_sale_web" model="ir.sequence">
+            <field name="name">NVWB Pedido Venta Web (Secuencia)</field>
+            <field name="prefix">NVWB/%(range_year)s/</field>
+            <field eval="300000" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+            <field eval="True" name="use_date_range"/>
+            <field eval="1" name="company_id"/>
+            <field name="padding">6</field>
+        </record>
+
+        <record id="cl_sequence_sale_openorder" model="ir.sequence">
+            <field name="name">NVAB Pedido Venta Abierto (Secuencia)</field>
+            <field name="prefix">NVAB/%(range_year)s/</field>
+            <field eval="400000" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+            <field eval="True" name="use_date_range"/>
+            <field eval="1" name="company_id"/>
+            <field name="padding">6</field>
+        </record>
+
+        <record id="cl_sequence_sale_cenabast" model="ir.sequence">
+            <field name="name">NVCB Pedido Venta Cenabast (Secuencia)</field>
+            <field name="prefix">NVCB/%(range_year)s/</field>
+            <field eval="500000" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+            <field eval="True" name="use_date_range"/>
+            <field eval="1" name="company_id"/>
+            <field name="padding">6</field>
+        </record>
+        
+        
+ </odoo>

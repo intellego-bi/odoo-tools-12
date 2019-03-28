@@ -34,7 +34,8 @@
         "views/sale_order_blanket_view.xml",
         "views/account_invoice_view.xml",
         "views/res_partner_view.xml",
-        "data/default_sale_order_type.xml",
+        "data/sale_order_sequence.xml",
+        "data/sale_order_type.xml",
     ],
     'installable': True,
 }
