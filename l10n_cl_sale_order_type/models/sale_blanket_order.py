@@ -11,6 +11,11 @@ class SaleBlanketOrder(models.Model):
     #    seq_type = self.env.ref('sale.seq_sale_order')
     #    return [('code', '=', seq_type.code)]
 
+    @api.model
+    def _get_default_date_end(self):
+        end_date = Date.today() + timedelta(years=1)
+        return end_date
+    
 
     name = fields.Char(string='Name', required=True, translate=True)
     description = fields.Text(string='Description', translate=True)
@@ -41,5 +46,5 @@ class SaleBlanketOrder(models.Model):
     pricelist_id = fields.Many2one('product.pricelist', 'Pricelist')
     incoterm_id = fields.Many2one('account.incoterms', 'Incoterm')
     date_from = fields.Date(string="Valid From", default=fields.Date.today(), readonly=False)
-    date_to = fields.Date(string="Valid To", default=fields.Date.today() + timedelta(years=1), readonly=False)
+    date_to = fields.Date(string="Valid To", default=fields.Date._get_default_date_end, readonly=False)
 
