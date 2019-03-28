@@ -8,7 +8,7 @@
 
     <record id="cl_cenabast" model="product.pricelist">
         <field name="name">Cenabast</field>
-        <field name="website_id">""</field>
+        <field name="website_id"></field>
         <field name="currency_id" ref="base.CLP"/>
         <field name="selectable" eval="True"/>
     </record>
