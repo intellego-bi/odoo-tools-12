@@ -29,4 +29,8 @@
   * Angel Moya Pardo <angel.moya@pesol.es>
   * Antonio J Rubio Lorente <antonio.rubio@pesol.es>
 
+* `Intellego-BI.com <https://www.Intellego-BI.com>`_
+
+  * Rodolfo Bermudez Neubauer <odoo@Intellego-BI.com>
+
 Do not contact contributors directly about support or help with technical issues.
