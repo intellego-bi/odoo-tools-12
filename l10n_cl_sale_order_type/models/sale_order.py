@@ -50,6 +50,9 @@ class SaleOrder(models.Model):
                 order.incoterm = order.blanket_id.incoterm_id.id
             if order.blanket_id.partner_id:
                 order.partner_id = order.blanket_id.partner_id.id
+            if order.blanket_id.partner_category_ids:
+                order.blanket_partner_category_ids = order.partner_category_ids
+
         
         #raise ValidationError(_(
         #            "Category Id (%s)"
