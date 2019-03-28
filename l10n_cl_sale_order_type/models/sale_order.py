@@ -76,8 +76,8 @@ class SaleOrder(models.Model):
                 order.pricelist_id = order.type_id.pricelist_id.id
             if order.type_id.incoterm_id:
                 order.incoterm = order.type_id.incoterm_id.id
-            if not order.type_id = order.blanket_id.sale_order_type_id:
-                order.blanket_id = ''
+            #if not order.type_id = order.blanket_id.sale_order_type_id:
+            #    order.blanket_id = ''
 
 
     @api.model
