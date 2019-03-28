@@ -4,11 +4,13 @@
   License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html)
  -->
  
-<odoo noupdate="1">
+<odoo noupdate="0">
 
     <record id="cl_cenabast" model="product.pricelist">
         <field name="name">Cenabast</field>
+        <field name="website_id">""</field>
         <field name="currency_id" ref="base.CLP"/>
+        <field name="selectable" eval="True"/>
     </record>
     
 </odoo>
