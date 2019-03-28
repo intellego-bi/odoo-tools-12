@@ -10,7 +10,7 @@
                 <field name="blanket_id" required="0"/>
             </field>
             <field name="partner_id" position="attributes">
-                <attribute name="domain">["&amp;",["customer","=",True],["category_id","in","allowed_partner_category_ids"]]</attribute>
+                <attribute name="domain">["&amp;",["customer","=",True],["category_id","in","blanket_partner_category_ids"]]</attribute>
             </field>
             <field name="payment_term_id" position="after">
                 <field name="blanket_partner_category_ids" string="Partner Categories" widget="many2many_tags" invisible="False"/>
