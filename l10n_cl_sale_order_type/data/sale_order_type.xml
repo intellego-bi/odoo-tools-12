@@ -35,7 +35,7 @@
     <record id="cl_cenabast_sale_type" model="sale.order.type">
         <field name="name">Cenabast Order</field>
         <field name="warehouse_id" ref="stock.warehouse0"/>
-        <field name="sequence_id" ref="l10n_cl_sale_order_type.cl_sequence_sale_cenbast"/>
+        <field name="sequence_id" ref="l10n_cl_sale_order_type.cl_sequence_sale_cenabast"/>
     </record>
 
     
