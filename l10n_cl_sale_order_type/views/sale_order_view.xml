@@ -8,33 +8,31 @@
         
             <xpath expr="//form[1]/sheet[1]/div[not(@name)][1]" position="after">
                 <group name="sot_type">
-                    <group name="sot_type_left" string="TIpo de Pedido de Venta"/>
+                    <group name="sot_type_left" string="Sale Order Type"/>
                 </group>
             </xpath>
+            
             <group name="sot_type_left" position="inside">
                 <field name="type_id" required="1" can_create="false" can_write="false" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
             </group>
             <xpath expr="//group[@name='sot_type']" position="inside">
-                <group name="sot_type_right" string="Pedido Marco"/>
+                <group name="sot_type_right" string="Blanket Sale Order"/>
             </xpath>
 
             <group name="sot_type_right" position="inside">
-                <field name="so_type_require_blanket" string="Type Requires Blanket Order" attrs="{'invisible': False}"/>
+                <field name="so_type_require_blanket" string="Requires Blanket Order" attrs="{'invisible': False}"/>
                 <field name="blanket_id" required="0" can_create="false" can_write="false"/>
                 <field name="blanket_partner_category_ids" string="Partner Categories" widget="many2many_tags" attrs="{'readonly': [('state', '!=', 'draft')]}"/>                
                 <field name="so_partner_ids" string="Partners by Categories" widget="many2many_tags" attrs="{'invisible': True}"/>
             </group>
 
             <field name="blanket_id" position="attributes">
+                <!-- Blanket orden obligatorio según atributos del Tipo de Pedido -->
                 <attribute name="attrs">{"invisible": [["so_type_require_blanket","=",False]], "readonly": [["state","!=","draft"]], "required": [["so_type_require_blanket","=",True]]}</attribute>
-                <!-- TODO: Blanket orden obligatorio según atributos del Tipo de Pedido -->
-                <!-- <attribute name="attrs">{"invisible": [["type_id","!=",1]], "required": [["type_id.name","ilike","Cenabast"]], "readonly": [("state", "not in", ("draft","cancel"))]}</attribute>
-                -->
             </field>
             
-            
             <field name="blanket_partner_category_ids" position="attributes">
-                <!-- TODO: FIELD category_ids sólo visible si existen en Blanket -->
+                <!-- FIELD category_ids sólo visible si existen en Blanket -->
                 <attribute name="attrs">{"invisible": [["so_type_require_blanket","=",False]]}</attribute>
             </field>
 
@@ -42,68 +40,11 @@
             <field name="partner_id" position="attributes">
                 <attribute name="domain">[["id","in",so_partner_ids]]</attribute>
             </field>
-
             
-  <xpath expr="//field[@name='blanket_partner_category_ids']" position="attributes">
-    <attribute name="domain">[["id","&gt;","0"]]</attribute>
-  </xpath>
-<!--
-
-  Mejorar Layout PEDIDO
-
-  <field name="name" position="after">
-    <group name="sot_type">
-      <group name="sot_type_left" string="Tipo de Pedido de Venta"/>
-    </group>
-  </field>
-  <group name="sot_type_left" position="inside">
-        <field name="type_id" required="1" can_create="false" can_write="false" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
-        <field name="blanket_id" required="0" can_create="false" can_write="false"/>
-        <field name="blanket_partner_category_ids" string="Partner Categories" widget="many2many_tags" attrs="{'readonly': [('state', '!=', 'draft')]}"/>                
-        <field name="so_partner_ids" string="Partners by Categories" widget="many2many_tags" attrs="{'invisible': True}"/>
-  </group>
-
-  
-  
-  <xpath expr="//form[1]/sheet[1]/div[not(@name)][1]" position="after">
-    <group name="studio_group_vTt3y">
-      <group name="studio_group_vTt3y_left" string="TIpo de Pedido de Venta"/>
-    </group>
-  </xpath>
-  <xpath expr="//group[@name='studio_group_vTt3y_left']" position="inside">
-    <xpath expr="//field[@name='type_id']" position="move"/>
-  </xpath>
-  <xpath expr="//group[@name='studio_group_vTt3y']" position="inside">
-    <group name="studio_group_vTt3y_right" string="Pedido Marco"/>
-  </xpath>
-  <xpath expr="//group[@name='studio_group_vTt3y_right']" position="inside">
-    <xpath expr="//field[@name='blanket_id']" position="move"/>
-    <xpath expr="//field[@name='blanket_partner_category_ids']" position="move"/>
-  </xpath>
-  <xpath expr="//field[@name='partner_id']" position="attributes">
-    <attribute name="domain">["&amp;",["customer","=",True],["category_id.id","&gt;=",1]]</attribute>
-  </xpath>
-  <xpath expr="//field[@name='partner_shipping_id']" position="after">
-    <xpath expr="//field[@name='delivery_block_id']" position="move"/>
-  </xpath>
-  <xpath expr="//field[@name='type_id']" position="attributes">
-    <attribute name="widget">selection_badge</attribute>
-  </xpath>
-</data>
-
-
-  <xpath expr="//field[@name='type_id']" position="attributes">
-    <attribute name="widget">many2one</attribute>
-  </xpath>
-  <xpath expr="//field[@name='blanket_id']" position="attributes">
-    <attribute name="widget">many2one</attribute>
-  </xpath>
-  <xpath expr="//field[@name='blanket_partner_category_ids']" position="attributes">
-    <attribute name="domain">[["id","&gt;","0"]]</attribute>
-  </xpath>
-
-
--->            
+            <xpath expr="//field[@name='blanket_partner_category_ids']" position="attributes">
+                <attribute name="domain">[["id","&gt;","0"]]</attribute>
+            </xpath>
+            
         </field>
     </record>
 </odoo>
