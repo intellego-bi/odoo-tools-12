@@ -30,6 +30,8 @@ class SaleOrder(models.Model):
     def _get_order_type(self):
         return self.env['sale.order.type'].search([], limit=1)
 
+    
+        
         
     type_id = fields.Many2one(
         comodel_name='sale.order.type', string='Type', default=_get_order_type)
@@ -50,6 +52,14 @@ class SaleOrder(models.Model):
     so_type_require_blanket = fields.Boolean('Type Requires Blanket Order', related='type_id.require_blanket')
 
 
+    @api.model
+    def _get_blanket_per_order_type(self):
+        sot_blanket_obj = self.env['sale.order.blanket']
+        sot_blanket_id = sot_blanket_obj.search([('sale_order_type_id', '=', self.type_id)], limit=1)
+        return sot_blanket_id
+
+    
+    
     @api.model
     def _compute_so_partner_ids(self):
         partner_obj = self.env['res.partner']
@@ -96,8 +106,10 @@ class SaleOrder(models.Model):
                 order.incoterm = order.type_id.incoterm_id.id
             if order.blanket_id:
                 if order.blanket_id.sale_order_type_id != order.type_id:
-                    order.blanket_id = []
-                    order.blanket_partner_category_ids = []
+                    #order.blanket_id = []
+                    #order.blanket_partner_category_ids = []
+                    order.blanket_id = order._get_blanket_per_order_type()
+                    #order.blanket_partner_category_ids = []
             order.so_partner_ids = self._compute_so_partner_ids()
             
             
