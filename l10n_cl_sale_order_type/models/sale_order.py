@@ -7,7 +7,11 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     def _get_partner_ids(self):
-        return self.env['res.partner'].search(['customer', '=', True])
+        customers = self.env['res.partner'].search([('customer', '=', True)])
+        if customers:
+            return customers
+        else: 
+            return [] 
 
     def _get_order_type(self):
         return self.env['sale.order.type'].search([], limit=1)
