@@ -37,8 +37,9 @@ class SaleOrder(models.Model):
             return sot_blanket_id
         else:
             if self.so_type_require_blanket:
-                raise UserError('No se han encontrado Pedidos Marco para el tipo de pedido.'
-                                'El tipo de pedido seleccionado requiere un Pedido Marco.')
+                raise UserError('No se han encontrado Pedidos Marco para el tipo de pedido. '
+                                'El tipo de pedido seleccionado requiere un Pedido Marco. '
+                                'Imposible seleccionar este tipo de pedido. Ajuste su configuración.')
             return sot_blanket_obj
     
     
