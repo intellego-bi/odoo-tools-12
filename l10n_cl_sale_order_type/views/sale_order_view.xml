@@ -26,44 +26,24 @@
             </group>
 
             <field name="blanket_id" position="attributes">
-                <attribute name="attrs">{"invisible": [["type_id","=",1]], "readonly": [("state", "!=", "draft")]}</attribute>
+                <attribute name="attrs">{"invisible": [["so_type_require_blanket","=",False]], "readonly": [["state","!=","draft"]], "required": [["so_type_require_blanket","=",True]]}</attribute>
                 <!-- TODO: Blanket orden obligatorio según atributos del Tipo de Pedido -->
                 <!-- <attribute name="attrs">{"invisible": [["type_id","!=",1]], "required": [["type_id.name","ilike","Cenabast"]], "readonly": [("state", "not in", ("draft","cancel"))]}</attribute>
                 -->
             </field>
+            
+            
             <field name="blanket_partner_category_ids" position="attributes">
                 <!-- TODO: FIELD category_ids sólo visible si existen en Blanket -->
-                <attribute name="attrs">{"invisible": [["type_id","=",1]]}</attribute>
+                <attribute name="attrs">{"invisible": [["so_type_require_blanket","=",False]]}</attribute>
             </field>
 
             <!-- DOMAIN de partner_id según Partners por Categorías en Blanket Order -->
             <field name="partner_id" position="attributes">
                 <attribute name="domain">[["id","in",so_partner_ids]]</attribute>
             </field>
-        
-            <field name="blanket_id" position="attributes">
-                <attribute name="attrs">{"invisible": [["type_id","=",1]], "readonly": [("state", "!=", "draft")]}</attribute>
-                <!-- TODO: Blanket orden obligatorio según atributos del Tipo de Pedido -->
-                <!-- <attribute name="attrs">{"invisible": [["type_id","!=",1]], "required": [["type_id.name","ilike","Cenabast"]], "readonly": [("state", "not in", ("draft","cancel"))]}</attribute>
-                -->
-            </field>
-            
-            <field name="blanket_partner_category_ids" position="attributes">
-                <!-- TODO: FIELD category_ids sólo visible si existen en Blanket -->
-                <attribute name="attrs">{"invisible": [["type_id","=",1]]}</attribute>
-            </field>
 
-            <!-- DOMAIN de partner_id según Partners por Categorías en Blanket Order -->
-            <field name="partner_id" position="attributes">
-                <attribute name="domain">[["id","in",so_partner_ids]]</attribute>
-            </field>
             
-  <xpath expr="//field[@name='type_id']" position="attributes">
-    <attribute name="widget">many2one</attribute>
-  </xpath>
-  <xpath expr="//field[@name='blanket_id']" position="attributes">
-    <attribute name="widget">many2one</attribute>
-  </xpath>
   <xpath expr="//field[@name='blanket_partner_category_ids']" position="attributes">
     <attribute name="domain">[["id","&gt;","0"]]</attribute>
   </xpath>
