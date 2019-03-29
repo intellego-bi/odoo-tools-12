@@ -7,13 +7,15 @@
         <field name="arch" type="xml">
             <field name="validity_date" position="before">
                 <field name="type_id" required="1" can_create="false" can_write="false" attrs="{'readonly': [('state', 'not in', ('draft','cancel'))]}"/>
-                <field name="blanket_id" required="0" can_create="false" can_write="false" attrs="{'readonly': [('state', 'not in', ('draft','cancel'))]}"/>
+                <field name="blanket_id" required="0" can_create="false" can_write="false"/>
                 <field name="blanket_partner_category_ids" string="Partner Categories" widget="many2many_tags" attrs="{'readonly': [('state', 'not in', ('draft','cancel'))]}"/>
             </field>
             <field name="blanket_id" position="attributes">
-                <attribute name="attrs">{"invisible": [["type_id","!=",1]]}</attribute>
+                <attribute name="attrs">{"invisible": [["type_id","!=",1]], "required": [["type_id","ilike","Cenabast"]], "readonly": [("state", "not in", ("draft","cancel"))]}</attribute>
                 <!-- TODO: Blanket orden obligatorio según atributos del Tipo de Pedido -->
-                <attribute name="attrs">{"required": [["type_id","=",2]]}</attribute>
+                <!-- <attribute name="attrs">{"invisible": [["type_id","!=",1]], "required": [["type_id.name","ilike","Cenabast"]], "readonly": [("state", "not in", ("draft","cancel"))]}</attribute>
+                -->
+                <attribute name="attrs">{}</attribute>
             </field>
             <field name="blanket_partner_category_ids" position="attributes">
                 <!-- TODO: FIELD category_ids sólo visible si existen en Blanket -->
