@@ -15,7 +15,6 @@
                 <!-- TODO: Blanket orden obligatorio según atributos del Tipo de Pedido -->
                 <!-- <attribute name="attrs">{"invisible": [["type_id","!=",1]], "required": [["type_id.name","ilike","Cenabast"]], "readonly": [("state", "not in", ("draft","cancel"))]}</attribute>
                 -->
-                <attribute name="attrs">{}</attribute>
             </field>
             <field name="blanket_partner_category_ids" position="attributes">
                 <!-- TODO: FIELD category_ids sólo visible si existen en Blanket -->
