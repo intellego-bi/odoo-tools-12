@@ -47,6 +47,6 @@ class SaleBlanketOrder(models.Model):
                                                     comodel_name='product.supplierinfo',
                                                     relation='cl_product_supplierinfo_sale_order_blanket_rel',
                                                     column1='sale_order_blanket_id',
-                                                    column2='product_supplierinfo_id'
-                                                    domain='[["name.name","ilike","Cenabast"]]')
+                                                    column2='product_supplierinfo_id')
+                                                    #domain='[["name.name","ilike","Cenabast"]]')
 
