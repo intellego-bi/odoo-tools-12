@@ -55,7 +55,7 @@ class SaleOrder(models.Model):
     @api.model
     def _get_blanket_per_order_type(self):
         sot_blanket_obj = self.env['sale.order.blanket']
-        sot_blanket_id = sot_blanket_obj.search([('sale_order_type_id', '=', self.type_id)], limit=1)
+        sot_blanket_id = sot_blanket_obj.search([('sale_order_type_id', '=', self.type_id)], limit=1).id
         return sot_blanket_id
 
     
@@ -106,11 +106,10 @@ class SaleOrder(models.Model):
                 order.incoterm = order.type_id.incoterm_id.id
             if order.blanket_id:
                 if order.blanket_id.sale_order_type_id != order.type_id:
-                    #order.blanket_id = []
-                    #order.blanket_partner_category_ids = []
-                    order.blanket_id = order._get_blanket_per_order_type()
-                    #order.blanket_partner_category_ids = []
+                    order.blanket_id = []
+                    order.blanket_partner_category_ids = []
             order.so_partner_ids = self._compute_so_partner_ids()
+            order.blanket_id = order._get_blanket_per_order_type()
             
             
     @api.multi
