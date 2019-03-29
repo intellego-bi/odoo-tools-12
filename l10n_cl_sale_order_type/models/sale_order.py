@@ -59,8 +59,8 @@ class SaleOrder(models.Model):
         else:
             raise ValidationError(_(
                     "No partners for category (%s) and blanket order (%s)") % (
-                        blanket_partner_category_ids,
-                        blanket_id))
+                        self.blanket_partner_category_ids,
+                        self.blanket_id))
             return []
                                   
     
