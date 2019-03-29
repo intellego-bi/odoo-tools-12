@@ -9,6 +9,7 @@
                 <field name="type_id" required="1" can_create="false" can_write="false" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                 <field name="blanket_id" required="0" can_create="false" can_write="false"/>
                 <field name="blanket_partner_category_ids" string="Partner Categories" widget="many2many_tags" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                <field name="blanket_partner_ids" string="Partners for Categories" widget="many2many_tags" attrs="{'invisible': True}"/>
             </field>
             <field name="blanket_id" position="attributes">
                 <attribute name="attrs">{"invisible": [["type_id","=",1]], "readonly": [("state", "!=", "draft")]}</attribute>
@@ -22,9 +23,9 @@
             </field>
 
             <!-- TODO: DOMAIN de partner_id según Categorías en Blanket -->
-            <!--<field name="partner_id" position="attributes">
-                <attribute name="domain">[["customer","=",True]]</attribute>
-            </field>-->
+            <field name="partner_id" position="attributes">
+                <attribute name="domain">[["id","=",blanket_partner_ids]]</attribute>
+            </field>
 
 <!--
 
