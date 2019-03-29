@@ -26,7 +26,7 @@ class SaleOrder(models.Model):
                 return self.env['res.partner']
 
     def _compute_blanket_partner_ids(self):
-        category_customer_ids = self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', self.blanket_id.partner_category_ids.id)])
+        category_customer_ids = self.env['res.partner'].search([('customer', '=', True), ('category_id', 'in', list(self.blanket_id.partner_category_ids.id))])
         self.dict_partner_category_ids = category_customer_ids
                 
 
