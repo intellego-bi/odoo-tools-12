@@ -62,10 +62,10 @@ class SaleOrder(models.Model):
                                   #store=True
                                   #)
 
-    @api.depends('blanket_partner_category_ids')
+    @api.depends('blanket_partner_category_ids', 'blanket_id.partner_category_ids')
     def _compute_blanket_partner_ids(self):
         #self.env['res.partner'].invalidate_cache() 
-        category_customer_ids = self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', self.blanket_partner_category_ids.id)])
+        category_customer_ids = self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', self.blanket_id.partner_category_ids.id)])
         self.dict_partner_category_ids = category_customer_ids
 
                                   
@@ -117,7 +117,7 @@ class SaleOrder(models.Model):
                 order.partner_id = order.blanket_id.partner_id.id
             if order.blanket_id.partner_category_ids:
                 order.blanket_partner_category_ids = order.blanket_id.partner_category_ids
-            #order.blanket_partner_ids = self._search_blanket_partner_ids()
+                order.blanket_partner_ids = self._search_blanket_partner_ids()
 
     #@api.multi
     #@api.onchange('blanket_partner_category_ids')
