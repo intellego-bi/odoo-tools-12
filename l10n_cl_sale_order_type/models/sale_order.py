@@ -94,9 +94,7 @@ class SaleOrder(models.Model):
     @api.onchange('type_id', 'blanket_id', 'blanket_partner_category_ids')
     def onchange_blanket_partner_category_ids(self):
         for order in self:
-            if order.blanket_partner_ids:
-                #order.blanket_partner_ids.invalidate_cache()
-                order.blanket_partner_ids = self._get_partner_ids()
+            order.blanket_partner_ids = order._get_partner_ids()
            
 
 
