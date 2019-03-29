@@ -5,12 +5,41 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-            <field name="validity_date" position="before">
+        
+            <xpath expr="//form[1]/sheet[1]/div[not(@name)][1]" position="after">
+                <group name="sot_type">
+                    <group name="sot_type_left" string="TIpo de Pedido de Venta"/>
+                </group>
+            </xpath>
+            <group name="sot_type_left" position="inside">
                 <field name="type_id" required="1" can_create="false" can_write="false" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+            </group>
+            <xpath expr="//group[@name='sot_type']" position="inside">
+                <group name="sot_type_right" string="Pedido Marco"/>
+            </xpath>
+
+            <group name="sot_type_right" position="inside">
                 <field name="blanket_id" required="0" can_create="false" can_write="false"/>
                 <field name="blanket_partner_category_ids" string="Partner Categories" widget="many2many_tags" attrs="{'readonly': [('state', '!=', 'draft')]}"/>                
                 <field name="so_partner_ids" string="Partners by Categories" widget="many2many_tags" attrs="{'invisible': True}"/>
+            </group>
+
+            <field name="blanket_id" position="attributes">
+                <attribute name="attrs">{"invisible": [["type_id","=",1]], "readonly": [("state", "!=", "draft")]}</attribute>
+                <!-- TODO: Blanket orden obligatorio según atributos del Tipo de Pedido -->
+                <!-- <attribute name="attrs">{"invisible": [["type_id","!=",1]], "required": [["type_id.name","ilike","Cenabast"]], "readonly": [("state", "not in", ("draft","cancel"))]}</attribute>
+                -->
             </field>
+            <field name="blanket_partner_category_ids" position="attributes">
+                <!-- TODO: FIELD category_ids sólo visible si existen en Blanket -->
+                <attribute name="attrs">{"invisible": [["type_id","=",1]]}</attribute>
+            </field>
+
+            <!-- DOMAIN de partner_id según Partners por Categorías en Blanket Order -->
+            <field name="partner_id" position="attributes">
+                <attribute name="domain">[["id","in",so_partner_ids]]</attribute>
+            </field>
+        
             <field name="blanket_id" position="attributes">
                 <attribute name="attrs">{"invisible": [["type_id","=",1]], "readonly": [("state", "!=", "draft")]}</attribute>
                 <!-- TODO: Blanket orden obligatorio según atributos del Tipo de Pedido -->
@@ -31,6 +60,20 @@
 
   Mejorar Layout PEDIDO
 
+  <field name="name" position="after">
+    <group name="sot_type">
+      <group name="sot_type_left" string="Tipo de Pedido de Venta"/>
+    </group>
+  </field>
+  <group name="sot_type_left" position="inside">
+        <field name="type_id" required="1" can_create="false" can_write="false" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+        <field name="blanket_id" required="0" can_create="false" can_write="false"/>
+        <field name="blanket_partner_category_ids" string="Partner Categories" widget="many2many_tags" attrs="{'readonly': [('state', '!=', 'draft')]}"/>                
+        <field name="so_partner_ids" string="Partners by Categories" widget="many2many_tags" attrs="{'invisible': True}"/>
+  </group>
+
+  
+  
   <xpath expr="//form[1]/sheet[1]/div[not(@name)][1]" position="after">
     <group name="studio_group_vTt3y">
       <group name="studio_group_vTt3y_left" string="TIpo de Pedido de Venta"/>
