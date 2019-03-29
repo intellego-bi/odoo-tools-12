@@ -64,6 +64,8 @@ class SaleOrder(models.Model):
     #                                                column2='partner_id')
 
     @api.model
+    #@api.depends('blanket_partner_category_ids', 'blanket_id.partner_category_ids')
+    @api.depends('blanket_partner_category_ids')
     def _compute_so_partner_ids(self):
         partner_obj = self.env['res.partner']
         #so_partner_obj_id = partner_obj.search( [('customer', '=', True)]).id
