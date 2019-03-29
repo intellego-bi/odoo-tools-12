@@ -7,11 +7,16 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     def _get_partner_ids(self):
-        order.blanket_partner_ids.invalidate_cache()
-        customers = self.env['res.partner'].search([('customer', '=', True)])   
+        self.env['res.partner'].invalidate_cache() 
+        customers = []
         if self.blanket_partner_category_ids.id > 0:
             customers = self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', self.blanket_partner_category_ids.id)])
-        return customers
+        if not customers:
+            customers = self.env['res.partner'].search([('customer', '=', True)])
+        if customers:
+            return customers
+        else:
+            return []
 
     def _get_order_type(self):
         return self.env['sale.order.type'].search([], limit=1)
