@@ -19,10 +19,10 @@
             </xpath>
 
             <group name="sot_type_right" position="inside">
+                <field name="so_type_require_blanket" string="Type Requires Blanket Order" attrs="{'invisible': False}"/>
                 <field name="blanket_id" required="0" can_create="false" can_write="false"/>
                 <field name="blanket_partner_category_ids" string="Partner Categories" widget="many2many_tags" attrs="{'readonly': [('state', '!=', 'draft')]}"/>                
                 <field name="so_partner_ids" string="Partners by Categories" widget="many2many_tags" attrs="{'invisible': True}"/>
-                <field name="so_type_require_blanket" string="Type Requires Blanket Order" attrs="{'invisible': False}"/>
             </group>
 
             <field name="blanket_id" position="attributes">
