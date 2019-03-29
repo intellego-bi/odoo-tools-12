@@ -12,7 +12,7 @@ class SaleOrder(models.Model):
         if get_customer_ids:
             return get_customer_ids
         else:
-            return []
+            return self.env['res.partner']
 
     def _search_blanket_partner_ids(self):
         category_customer_ids = []
@@ -23,7 +23,7 @@ class SaleOrder(models.Model):
             if len(category_customer_ids) > 0:
                 return category_customer_ids
             else:
-                return []
+                return self.env['res.partner']
         
 
     def _get_order_type(self):
@@ -65,7 +65,7 @@ class SaleOrder(models.Model):
     @api.depends('blanket_partner_category_ids')
     def _compute_blanket_partner_ids(self):
         #self.env['res.partner'].invalidate_cache() 
-        category_customer_ids = self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', order.blanket_partner_category_ids.id)])
+        category_customer_ids = self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', self.blanket_partner_category_ids.id)])
         self.dict_partner_category_ids = category_customer_ids
 
                                   
