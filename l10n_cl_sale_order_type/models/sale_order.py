@@ -29,7 +29,7 @@ class SaleOrder(models.Model):
                                                     column1='sale_order_blanket_id',
                                                     column2='category_id')
 
-    partner_ids = fields.Many2one('res.partner', 
+    blanket_partner_ids = fields.Many2one('res.partner', 
                                   string='Partners from Blanket Order', 
                                   compute='_get_partner_ids', 
                                   readonly=True, 
@@ -81,7 +81,7 @@ class SaleOrder(models.Model):
                 order.partner_id = order.blanket_id.partner_id.id
             if order.blanket_id.partner_category_ids:
                 order.blanket_partner_category_ids = order.blanket_id.partner_category_ids
-                order.partner_ids = self._get_partner_ids()
+                order.blanket_partner_ids = self._get_partner_ids()
 
         
         #raise ValidationError(_(
