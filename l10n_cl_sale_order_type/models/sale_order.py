@@ -63,8 +63,15 @@ class SaleOrder(models.Model):
     #                                                column1='sale_order_id',
     #                                                column2='partner_id')
 
-    so_partner_ids = fields.Many2many(default=lambda self: self._default_so_partner_ids())
-        
+    so_partner_ids = fields.Many2many('res.partner', string='Partners by Categories',
+                                      default=lambda self: self._default_so_partner_ids(),
+                                      readonly=True,
+                                      store=True,
+                                      relation='cl_partner_category_rel',
+                                      column1='sale_order_id',
+                                      column2='partner_id')
+
+    
     @api.model
     def _default_so_partner_ids(self):
         partner_obj = self.env['res.partner']
