@@ -51,7 +51,7 @@ class SaleOrder(models.Model):
                                                     column2='category_id')
 
     dict_partner_category_ids = fields.Many2many(string='Partners by Categories',
-                                                    compute='_compute_blanket_partner_ids'
+                                                    compute='_compute_blanket_partner_ids',
                                                     readonly=True, 
                                                     store=True,
                                                     comodel_name='res.partner',
