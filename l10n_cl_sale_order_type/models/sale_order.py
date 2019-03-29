@@ -1,4 +1,27 @@
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# -*- coding: utf-8 -*-
+###################################################################################
+#
+#    Intellego-BI.com
+#    Copyright (C) 2017-TODAY Intellego Business Intelligence S.A.(<http://www.intellego-bi.com>).
+#    Author: Rodolfo Bermúdez Neubauer(<https://www.intellego-bi.com>)
+#
+#    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+#
+#    This program is free software: you can modify
+#    it under the terms of the GNU Affero General Public License (AGPL) as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# 
+###################################################################################
+
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
@@ -38,10 +61,9 @@ class SaleOrder(models.Model):
         else:
             if self.so_type_require_blanket:
                 raise UserError('No se han encontrado Pedidos Marco para el tipo de pedido. '
-                                'Imposible seleccionar este tipo de pedido. Ajuste su configuraci�n. ')
-                                
+                                'El tipo de pedido seleccionado requiere un Pedido Marco. '
+                                'Imposible seleccionar este tipo de pedido. Ajuste su configuración.')
             return sot_blanket_obj
-
     
     
     @api.model
