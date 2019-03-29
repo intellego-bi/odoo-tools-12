@@ -14,6 +14,18 @@ class SaleOrder(models.Model):
         else:
             return []
 
+    def _search_blanket_partner_ids(self):
+        #self.env['res.partner'].invalidate_cache() 
+        customer_ids = []
+        for order in self:
+            customer_ids += self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', order.blanket_partner_category_ids.id)])
+        if len(customer_ids) == 0:
+            customer_ids = self.env['res.partner'].search([('customer', '=', True)])
+        if len(customer_ids) > 0:
+            return customer_ids
+        else:
+            return []
+        
 
     def _get_order_type(self):
         return self.env['sale.order.type'].search([], limit=1)
@@ -93,7 +105,7 @@ class SaleOrder(models.Model):
     @api.multi
     @api.onchange('blanket_id')
     def onchange_blanket_id(self):
-        super(SaleOrder, self).onchange_blanket_id()
+        #super(SaleOrder, self).onchange_blanket_id()
         for order in self:
             if order.blanket_id.sale_order_type_id:
                 order.type_id = order.blanket_id.sale_order_type_id
