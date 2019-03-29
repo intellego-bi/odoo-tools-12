@@ -77,7 +77,7 @@ class SaleOrder(models.Model):
         partner_obj = self.env['res.partner']
         #so_partner_obj_id = partner_obj.search( [('customer', '=', True)]).id
         #so_partner_obj_id = so_partner_obj_id or False
-        so_partner_obj_ids = partner_obj.search( [('customer', '=', True)]).id
+        so_partner_obj_ids = partner_obj.search( [('customer', '=', True)])
         so_partner_obj_ids = so_partner_obj_ids or []
         return [so_partner_obj_ids]
                                                     
