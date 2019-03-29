@@ -56,10 +56,13 @@ class SaleOrder(models.Model):
     def _get_blanket_per_order_type(self):
         sot_blanket_obj = self.env['sale.order.blanket']
         sot_blanket_id = sot_blanket_obj.search([('sale_order_type_id', '=', self.type_id.id)], limit=1)
-        if not sot_blanket_id:
-            raise UserError(_('No se han encontrado Pedidos Marco para el tipo (%s).' 
-                              'Cree un Pedido Marco en el menú de configuración.') % (self.type_id.name))
-        return sot_blanket_id
+        if sot_blanket_id:
+            return sot_blanket_id
+        else:
+            raise UserError(_('No se han encontrado Pedidos Marco para el tipo de pedido.'))
+            return []
+        
+        
 
     
     
