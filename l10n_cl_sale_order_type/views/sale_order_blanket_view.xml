@@ -50,11 +50,8 @@
                     </page>
                     
                     <page name="sob_page_products" string="Products">
-                       <group name="sob_group_products">
-                           <group name="sob_group_products_left">
-                           </group>
-                           <group name="sob_group_products_right">
-                           </group>
+                        <group name="sob_group_products">
+                            <field name="sob_vendor_pricelist" domain="[[&quot;name.category_id&quot;,&quot;ilike&quot;,&quot;Cenabast&quot;]]"/>
                         </group>
                     </page>
 
