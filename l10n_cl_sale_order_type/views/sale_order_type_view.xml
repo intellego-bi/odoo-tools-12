@@ -16,12 +16,12 @@
                     </group>
                     <group>
                         <group>
+                            <field name="require_blanket" />
                             <field name="warehouse_id" />
                             <field name="company_id" attrs="{'invisible': [('warehouse_id', '=', False)]}"/>
                             <field name="sequence_id" />
                         </group>
                         <group>
-                            <field name="require_blanket" />
                             <field name="journal_id" />
                             <field name="picking_policy" />
                             <field name="payment_term_id" />

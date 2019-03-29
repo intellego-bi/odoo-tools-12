@@ -46,6 +46,8 @@ class SaleOrder(models.Model):
                                                     relation='cl_blanket_partner_category_rel',
                                                     column1='sale_order_id',
                                                     column2='category_id')
+    
+    so_type_require_blanket = fields.Boolean('Type Requires Blanket Order', related=type_id.require_blanket)
 
 
     @api.model
