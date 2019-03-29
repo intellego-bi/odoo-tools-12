@@ -46,7 +46,16 @@ class SaleOrder(models.Model):
                                                     column1='sale_order_blanket_id',
                                                     column2='category_id')
 
-    blanket_partner_ids = fields.Many2one('res.partner', string='Partners from Blanket Order')
+    dict_partner_category_ids = fields.Many2many(string='Partners by Categories',
+                                                    readonly=True, 
+                                                    store=True,
+                                                    comodel_name='res.partner',
+                                                    relation='cl_partner_category_rel',
+                                                    column1='sale_order_blanket_id',
+                                                    column2='partner_id')
+                                                    
+                                                    
+    #blanket_partner_ids = fields.Many2one('res.partner', string='Partners from Blanket Order')
                                   #compute='_get_partner_ids')    
                                   #compute='_compute_blanket_partner_ids', 
                                   #readonly=False, 
@@ -57,7 +66,7 @@ class SaleOrder(models.Model):
     def _compute_blanket_partner_ids(self):
         #self.env['res.partner'].invalidate_cache() 
         category_customer_ids = self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', order.blanket_partner_category_ids.id)])
-        self.blanket_partner_ids = category_customer_ids
+        self.dict_partner_category_ids = category_customer_ids
 
                                   
     
