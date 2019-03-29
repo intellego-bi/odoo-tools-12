@@ -75,9 +75,11 @@ class SaleOrder(models.Model):
     @api.model
     def _default_so_partner_ids(self):
         partner_obj = self.env['res.partner']
-        so_partner_obj_id = partner_obj.search( [('customer', '=', True)]).id
-        so_partner_obj_id = so_partner_obj_id or False
-        return [so_partner_obj_id]
+        #so_partner_obj_id = partner_obj.search( [('customer', '=', True)]).id
+        #so_partner_obj_id = so_partner_obj_id or False
+        so_partner_obj_ids = partner_obj.search( [('customer', '=', True)]).id
+        so_partner_obj_ids = so_partner_obj_ids or []
+        return [so_partner_obj_ids]
                                                     
                                                     
     #blanket_partner_ids = fields.Many2one('res.partner', string='Partners from Blanket Order')
