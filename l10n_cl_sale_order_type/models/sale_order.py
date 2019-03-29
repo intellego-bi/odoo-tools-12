@@ -12,7 +12,7 @@ class SaleOrder(models.Model):
         if len(customer_ids) == 0:
             customer_ids = self.env['res.partner'].search([('customer', '=', True)])
         if len(customer_ids) > 0:
-            return customers
+            return customer_ids
         else:
             return []
 
