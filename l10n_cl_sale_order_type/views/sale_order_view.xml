@@ -11,7 +11,7 @@
                 <field name="blanket_partner_category_ids" string="Partner Categories" widget="many2many_tags" attrs="{'readonly': [('state', 'not in', ('draft','cancel'))]}"/>
             </field>
             <field name="blanket_id" position="attributes">
-                <attribute name="attrs">{"invisible": [["type_id","!=",1]], "readonly": [("state", "!=", "draft")]}</attribute>
+                <attribute name="attrs">{"invisible": [["type_id","=",1]], "readonly": [("state", "!=", "draft")]}</attribute>
                 <!-- TODO: Blanket orden obligatorio según atributos del Tipo de Pedido -->
                 <!-- <attribute name="attrs">{"invisible": [["type_id","!=",1]], "required": [["type_id.name","ilike","Cenabast"]], "readonly": [("state", "not in", ("draft","cancel"))]}</attribute>
                 -->
