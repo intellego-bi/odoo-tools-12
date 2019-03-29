@@ -7,7 +7,7 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     def _get_partner_ids(self):
-        customers = self.env['res.partner'].search([('category_id', '=', self.blanket_partner_category_ids.id)])
+        customers = self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', self.blanket_partner_category_ids.id)])
         if not customers: 
             customers = self.env['res.partner'].search([('customer', '=', True)])
             if not customers:
@@ -88,15 +88,13 @@ class SaleOrder(models.Model):
                 order.blanket_partner_category_ids = order.blanket_id.partner_category_ids
                 order.blanket_partner_ids = self._get_partner_ids()
 
-        
-        #raise ValidationError(_(
-        #            "Category Id (%s)"
-        #            "and IDs (%s)") % (
-        #                self.blanket_partner_category_ids,
-        #                self.blanket_partner_category_ids.id))
-
-    
-            
+    @api.multi
+    @api.onchange('blanket_partner_category_ids')
+    def onchange_blanket_partner_category_ids(self):
+        for order in self:
+            if order.blanket_partner_category_ids:
+                order.blanket_partner_ids = self._get_partner_ids()
+           
 
 
     @api.model
