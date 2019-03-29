@@ -72,7 +72,8 @@ class SaleOrder(models.Model):
                      self.partner_id.commercial_partner_id.sale_type)
         if sale_type:
             self.type_id = sale_type
-
+   
+            
     @api.multi
     @api.onchange('type_id')
     def onchange_type_id(self):
@@ -109,7 +110,7 @@ class SaleOrder(models.Model):
                 order.partner_id = order.blanket_id.partner_id.id
             if order.blanket_id.partner_category_ids:
                 order.blanket_partner_category_ids = order.blanket_id.partner_category_ids
-                #order.blanket_partner_ids = self._get_partner_ids()
+                order.blanket_partner_ids = self._compute_blanket_partner_ids()
 
     #@api.multi
     #@api.onchange('blanket_partner_category_ids')
