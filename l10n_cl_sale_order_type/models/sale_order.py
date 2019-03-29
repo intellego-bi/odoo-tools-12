@@ -36,7 +36,7 @@ class SaleOrder(models.Model):
                                                     column2='category_id')
 
     blanket_partner_ids = fields.Many2one('res.partner', string='Partners from Blanket Order',
-                                  default='_get_partner_ids')    
+                                  compute='_get_partner_ids')    
                                   #compute='_compute_blanket_partner_ids', 
                                   #readonly=False, 
                                   #store=True
