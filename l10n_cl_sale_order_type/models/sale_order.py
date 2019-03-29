@@ -54,14 +54,23 @@ class SaleOrder(models.Model):
                                                     column1='sale_order_id',
                                                     column2='category_id')
 
-    dict_partner_category_ids = fields.Many2many(string='Partners by Categories',
-                                                    compute='_compute_blanket_partner_ids',
-                                                    readonly=True, 
-                                                    store=True,
-                                                    comodel_name='res.partner',
-                                                    relation='cl_partner_category_rel',
-                                                    column1='sale_order_id',
-                                                    column2='partner_id')
+    #dict_partner_category_ids = fields.Many2many(string='Partners by Categories',
+    #                                                #compute='_compute_blanket_partner_ids',
+    #                                                readonly=True, 
+    #                                                store=True,
+    #                                                comodel_name='res.partner',
+    #                                                relation='cl_partner_category_rel',
+    #                                                column1='sale_order_id',
+    #                                                column2='partner_id')
+
+    so_partner_ids = fields.Many2many(default=lambda self: self._default_so_partner_ids())
+        
+    @api.model
+    def _default_so_partner_ids(self):
+        partner_obj = self.env['res.partner']
+        so_partner_obj_id = partner_obj.search( [('customer', '=', True)]).id
+        so_partner_obj_id = so_partner_obj_id or False
+        return [so_partner_obj_id]
                                                     
                                                     
     #blanket_partner_ids = fields.Many2one('res.partner', string='Partners from Blanket Order')
@@ -71,11 +80,14 @@ class SaleOrder(models.Model):
                                   #store=True
                                   #)
 
-    @api.depends('blanket_partner_category_ids', 'blanket_id.partner_category_ids')
-    def _depends_blanket_partner_ids(self):
-        #self.env['res.partner'].invalidate_cache() 
-        category_customer_ids = self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', self.blanket_id.partner_category_ids.id)])
-        self.dict_partner_category_ids = category_customer_ids
+    #@api.depends('blanket_partner_category_ids', 'blanket_id.partner_category_ids')
+    @api.multi
+    @api.onchange('blanket_partner_category_ids')
+    def _onchange_blanket_partner_ids(self):
+        #self.env['res.partner'].invalidate_cache()
+        for so in self:        
+            category_customer_ids = self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', so.blanket_partner_category_ids.id)])
+            self.dict_partner_category_ids = category_customer_ids
 
                                   
     
@@ -126,7 +138,7 @@ class SaleOrder(models.Model):
                 order.partner_id = order.blanket_id.partner_id.id
             if order.blanket_id.partner_category_ids:
                 order.blanket_partner_category_ids = order.blanket_id.partner_category_ids
-                order.blanket_partner_ids = self._compute_blanket_partner_ids()
+                #order.blanket_partner_ids = self._compute_blanket_partner_ids()
 
     #@api.multi
     #@api.onchange('blanket_partner_category_ids')
