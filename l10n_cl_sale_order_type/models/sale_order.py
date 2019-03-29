@@ -149,7 +149,6 @@ class SaleOrder(models.Model):
                 so.so_partner_ids = so_partner_obj.search([('customer', '=', True)]) or []
          
 
-
     @api.model
     def create(self, vals):
         if vals.get('name', '/') == '/'and vals.get('type_id'):
@@ -168,3 +167,5 @@ class SaleOrder(models.Model):
         if self.blanket_id:
             res['sale_blanket_id'] = self.blanket_id.id
         return res
+
+        
