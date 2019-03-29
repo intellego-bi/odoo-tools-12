@@ -42,7 +42,7 @@ class SaleOrder(models.Model):
                                   string='Partners from Blanket Order', 
                                   compute='_get_partner_ids', 
                                   readonly=True, 
-                                  store=False)
+                                  store=True)
                                                 
     
     @api.multi
