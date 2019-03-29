@@ -90,7 +90,7 @@ class SaleOrder(models.Model):
                 order.partner_id = order.blanket_id.partner_id.id
             if order.blanket_id.partner_category_ids:
                 order.blanket_partner_category_ids = order.blanket_id.partner_category_ids
-                order.blanket_partner_ids = self._get_partner_ids()
+                #order.blanket_partner_ids = self._get_partner_ids()
 
     @api.multi
     @api.onchange('type_id', 'blanket_id', 'blanket_partner_category_ids')
