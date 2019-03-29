@@ -4,8 +4,9 @@
         <field name="name">sale.order.blanket.form.view</field>
         <field name="model">sale.order.blanket</field>
         <field name="arch" type="xml">
-            <form string="Type">
-                <sheet>
+        
+        <form string="Blanket Order">
+            <sheet>
                     <group>
                         <div class="oe_title">
                             <label for="name" class="oe_edit_only"/>
@@ -18,31 +19,49 @@
                             </h3>
                         </div>
                     </group>
-                    <group>
-                        <group>
-                            <field name="partner_id" />
-                            <field name="partner_category_ids" widget="many2many_tags"/>
-                            <field name="product_category_ids" widget="many2many_tags"/>
-                            <field name="sale_order_type_id" />
-                            <field name="pricelist_id" />
-                            <field name="payment_term_id" />
-                            <field name="incoterm_id" />
-                        </group>
-                        <group>
-                            <field name="active" />
-                            <field name="company_id"/>
-                            <field name="date_from"/>
-                            <field name="date_to"/>                            
-                        </group>
-                    </group>
+
                     <group>
                         <label for="description"/>
                         <h2>
                             <field name="description"/>
                         </h2>                            
                     </group>
-                </sheet>
-            </form>
+                    
+                <notebook name="sob_notebook_settings">
+                 
+                    <page name="sob_page_settings" string="Settings">
+                        <group name="sob_group_settings">
+                            <group name="sob_group_settings_left">
+                                <field name="partner_id"/>
+                                <field name="partner_category_ids" widget="many2many_tags"/>
+                                <field name="product_category_ids" widget="many2many_tags"/>
+                                <field name="sale_order_type_id"/>
+                                <field name="pricelist_id"/>
+                                <field name="payment_term_id"/>
+                                <field name="incoterm_id"/>
+                            </group>
+                            <group name="sob_group_settings_right">
+                                <field name="active"/>
+                                <field name="company_id"/>
+                                <field name="date_from"/>
+                                <field name="date_to"/>                            
+                            </group>
+                        </group>
+                    </page>
+                    
+                    <page name="sob_page_products" string="Products">
+                       <group name="sob_group_products">
+                           <group name="sob_group_products_left">
+                           </group>
+                           <group name="sob_group_products_right">
+                           </group>
+                        </group>
+                    </page>
+
+                </notebook>
+            </sheet>
+        </form>
+            
         </field>
     </record>
 
