@@ -161,13 +161,14 @@ class SaleOrder(models.Model):
     @api.multi
     @api.onchange('blanket_partner_category_ids')
     def onchange_blanket_partner_category_ids(self):
+        so_partner_obj = self.env['res.partner']
         for so in self:
             if len(self.blanket_partner_category_ids) == 1:
-                so.so_partner_ids = partner_obj.search( [('customer', '=', True), ('category_id', '=', so.blanket_partner_category_ids.id)])
+                so.so_partner_ids = so_partner_obj.search([('customer', '=', True), ('category_id', '=', so.blanket_partner_category_ids.id)])
             elif len(self.blanket_partner_category_ids) > 1:
-                so.so_partner_ids = partner_obj.search( [('customer', '=', True), ('category_id', 'in', so.blanket_partner_category_ids)])
+                so.so_partner_ids = so_partner_obj.search([('customer', '=', True), ('category_id', 'in', so.blanket_partner_category_ids)])
             else:
-                so.so_partner_ids = partner_obj.search( [('customer', '=', True)]) or []
+                so.so_partner_ids = so_partner_obj.search([('customer', '=', True)]) or []
             
                 
                 
