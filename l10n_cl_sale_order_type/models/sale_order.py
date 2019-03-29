@@ -45,7 +45,8 @@ class SaleOrder(models.Model):
                                   readonly=True, 
                                   store=True)
 
-    @api.depends('blanket_id.partner_category_ids')
+    #@api.depends('blanket_id.partner_category_ids')
+    @api.depends('blanket_partner_category_ids')
     def _compute_blanket_partner_ids(self):
         #self.env['res.partner'].invalidate_cache() 
         customer_ids = []
