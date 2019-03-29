@@ -42,4 +42,11 @@ class SaleBlanketOrder(models.Model):
     incoterm_id = fields.Many2one('account.incoterms', 'Incoterm')
     date_from = fields.Date(string="Valid From", default=fields.Date.today(), readonly=False)
     date_to = fields.Date(string="Valid To", default=fields.Date.today(), readonly=False)
+    
+    sob_vendor_pricelist = fields.Many2many(string="Vendor Pricelist",
+                                                    comodel_name='product.supplierinfo',
+                                                    relation='cl_product_supplierinfo_sale_order_blanket_rel',
+                                                    column1='sale_order_blanket_id',
+                                                    column2='product_supplierinfo_id'
+                                                    domain='[["name.name","ilike","Cenabast"]]')
 
