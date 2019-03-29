@@ -7,7 +7,7 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     def _get_partner_ids(self):
-        customers = self.env['res.partner'].search([('category_id', 'in', self.blanket_partner_category_ids)])
+        customers = self.env['res.partner'].search([('category_id', 'in', self.blanket_partner_category_ids.id)])
         if customers:
             return customers
         else: 
