@@ -67,8 +67,12 @@ class SaleOrder(models.Model):
     def _compute_so_partner_ids(self):
         partner_obj = self.env['res.partner']
         #so_partner_obj_id = partner_obj.search( [('customer', '=', True)]).id
-        #so_partner_obj_id = so_partner_obj_id or False
-        so_partner_obj_ids = partner_obj.search( [('customer', '=', True)])
+        if len(self.blanket_partner_category_ids) == 1:
+            so_partner_obj_ids = partner_obj.search( [('customer', '=', True), ('category_id', '=', self.blanket_partner_category_ids.id)])
+        elif len(self.blanket_partner_category_ids) > 1:
+            so_partner_obj_ids = partner_obj.search( [('customer', '=', True), ('category_id', 'in', self.blanket_partner_category_ids)])
+        else:
+            so_partner_obj_ids = partner_obj.search( [('customer', '=', True)])
         so_partner_obj_ids = so_partner_obj_ids or []
         return [so_partner_obj_ids]
     
