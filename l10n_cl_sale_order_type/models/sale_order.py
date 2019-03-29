@@ -42,11 +42,11 @@ class SaleOrder(models.Model):
     blanket_partner_ids = fields.Many2one('res.partner', 
                                   string='Partners from Blanket Order', 
                                   compute='_compute_blanket_partner_ids', 
-                                  readonly=True, 
+                                  readonly=False, 
                                   store=True)
 
-    #@api.depends('blanket_id.partner_category_ids')
-    @api.depends('blanket_partner_category_ids')
+    #@api.depends('blanket_id', 'blanket_id.partner_category_ids')
+    @api.depends('blanket_partner_category_ids', 'blanket_id', 'blanket_id.partner_category_ids', 'type_id')
     def _compute_blanket_partner_ids(self):
         #self.env['res.partner'].invalidate_cache() 
         customer_ids = []
@@ -57,6 +57,10 @@ class SaleOrder(models.Model):
         if len(customer_ids) > 0:
             return customer_ids
         else:
+            raise ValidationError(_(
+                    "No partners for category (%s) and blanket order (%s)") % (
+                        blanket_partner_category_ids,
+                        blanket_id))
             return []
                                   
     
