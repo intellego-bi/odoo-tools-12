@@ -6,32 +6,9 @@ from odoo.exceptions import UserError, ValidationError
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    def _get_partner_ids(self):
-        #self.env['res.partner'].invalidate_cache() 
-        get_customer_ids = self.env['res.partner'].search([('customer', '=', True)])
-        if get_customer_ids:
-            return get_customer_ids
-        else:
-            return self.env['res.partner']
-
-    def _search_blanket_partner_ids(self):
-        category_customer_ids = []
-        for order in self:
-            category_customer_ids = self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', order.blanket_partner_category_ids.id)])
-            if len(category_customer_ids) == 0:
-                category_customer_ids = self.env['res.partner'].search([('customer', '=', True)])
-            if len(category_customer_ids) > 0:
-                return category_customer_ids
-            else:
-                return self.env['res.partner']
-
-                
-
     def _get_order_type(self):
         return self.env['sale.order.type'].search([], limit=1)
 
-    
-        
         
     type_id = fields.Many2one(
         comodel_name='sale.order.type', string='Type', default=_get_order_type)
@@ -60,11 +37,9 @@ class SaleOrder(models.Model):
             return sot_blanket_id
         else:
             if self.so_type_require_blanket:
-                raise UserError('No se han encontrado Pedidos Marco para el tipo de pedido.')
+                raise UserError('No se han encontrado Pedidos Marco para el tipo de pedido.'
+                                'El tipo de pedido seleccionado requiere un Pedido Marco.')
             return sot_blanket_obj
-        
-        
-
     
     
     @api.model
@@ -122,7 +97,6 @@ class SaleOrder(models.Model):
     @api.multi
     @api.onchange('blanket_id')
     def onchange_blanket_id(self):
-        #super(SaleOrder, self).onchange_blanket_id()
         for order in self:
             if order.blanket_id.sale_order_type_id:
                 order.type_id = order.blanket_id.sale_order_type_id
