@@ -6,10 +6,10 @@ from odoo.exceptions import UserError, ValidationError
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    def _get_order_type(self):
+    def _get_partner_ids(self):
         return self.env['res.partner'].search(['customer', '=', 'True'])
 
-    def _get_partner_ids(self):
+    def _get_order_type(self):
         return self.env['sale.order.type'].search([], limit=1)
 
         
@@ -29,13 +29,12 @@ class SaleOrder(models.Model):
                                                     column1='sale_order_blanket_id',
                                                     column2='category_id')
 
-    partner_ids = fields.Many2one(
-                                  comodel_name='res.partner', 
+    partner_ids = fields.Many2one('res.partner', 
                                   string='Partners from Blanket Order', 
-                                  compute=_get_partner_ids, 
+                                  compute='_get_partner_ids', 
                                   readonly=True, 
                                   store=True)
-                                                        
+                                                
     
     @api.multi
     @api.onchange('partner_id')
@@ -82,6 +81,7 @@ class SaleOrder(models.Model):
                 order.partner_id = order.blanket_id.partner_id.id
             if order.blanket_id.partner_category_ids:
                 order.blanket_partner_category_ids = order.blanket_id.partner_category_ids
+                order.partner_ids = self._get_partner_ids()
 
         
         #raise ValidationError(_(
