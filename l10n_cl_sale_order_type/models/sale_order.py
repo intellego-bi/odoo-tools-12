@@ -9,7 +9,7 @@ class SaleOrder(models.Model):
     def _get_partner_ids(self):
         self.env['res.partner'].invalidate_cache() 
         customers = []
-        if self.blanket_partner_category_ids.id > 0:
+        if self.blanket_partner_category_ids:
             customers = self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', self.blanket_partner_category_ids.id)])
         if not customers:
             customers = self.env['res.partner'].search([('customer', '=', True)])
