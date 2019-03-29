@@ -8,13 +8,16 @@ class SaleOrder(models.Model):
 
     def _get_partner_ids(self):
         #self.env['res.partner'].invalidate_cache() 
-        customer_ids = self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', self.blanket_partner_category_ids.id)])
+        customer_ids = []
+        for order in self:
+            customer_ids += self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', order.blanket_partner_category_ids.id)])
         if len(customer_ids) == 0:
             customer_ids = self.env['res.partner'].search([('customer', '=', True)])
         if len(customer_ids) > 0:
             return customer_ids
         else:
             return []
+
 
     def _get_order_type(self):
         return self.env['sale.order.type'].search([], limit=1)
@@ -38,7 +41,7 @@ class SaleOrder(models.Model):
 
     blanket_partner_ids = fields.Many2one('res.partner', 
                                   string='Partners from Blanket Order', 
-                                  #compute='_get_partner_ids', 
+                                  default='_get_partner_ids', 
                                   readonly=True, 
                                   store=True)
                                                 
@@ -91,7 +94,7 @@ class SaleOrder(models.Model):
                 #order.blanket_partner_ids = self._get_partner_ids()
 
     @api.multi
-    @api.onchange('type_id', 'blanket_id', 'blanket_partner_category_ids')
+    @api.onchange('blanket_partner_category_ids')
     def onchange_blanket_partner_category_ids(self):
         customer_ids = []
         for order in self:
