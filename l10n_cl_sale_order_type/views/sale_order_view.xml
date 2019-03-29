@@ -46,6 +46,7 @@
                 <!-- <attribute name="attrs">{"invisible": [["type_id","!=",1]], "required": [["type_id.name","ilike","Cenabast"]], "readonly": [("state", "not in", ("draft","cancel"))]}</attribute>
                 -->
             </field>
+            
             <field name="blanket_partner_category_ids" position="attributes">
                 <!-- TODO: FIELD category_ids sólo visible si existen en Blanket -->
                 <attribute name="attrs">{"invisible": [["type_id","=",1]]}</attribute>
@@ -55,7 +56,16 @@
             <field name="partner_id" position="attributes">
                 <attribute name="domain">[["id","in",so_partner_ids]]</attribute>
             </field>
-
+            
+  <xpath expr="//field[@name='type_id']" position="attributes">
+    <attribute name="widget">many2one</attribute>
+  </xpath>
+  <xpath expr="//field[@name='blanket_id']" position="attributes">
+    <attribute name="widget">many2one</attribute>
+  </xpath>
+  <xpath expr="//field[@name='blanket_partner_category_ids']" position="attributes">
+    <attribute name="domain">[["id","&gt;","0"]]</attribute>
+  </xpath>
 <!--
 
   Mejorar Layout PEDIDO
@@ -99,6 +109,18 @@
     <attribute name="widget">selection_badge</attribute>
   </xpath>
 </data>
+
+
+  <xpath expr="//field[@name='type_id']" position="attributes">
+    <attribute name="widget">many2one</attribute>
+  </xpath>
+  <xpath expr="//field[@name='blanket_id']" position="attributes">
+    <attribute name="widget">many2one</attribute>
+  </xpath>
+  <xpath expr="//field[@name='blanket_partner_category_ids']" position="attributes">
+    <attribute name="domain">[["id","&gt;","0"]]</attribute>
+  </xpath>
+
 
 -->            
         </field>
