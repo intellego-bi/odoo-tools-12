@@ -25,7 +25,7 @@
 
             <!-- TODO: DOMAIN de partner_id según Categorías en Blanket -->
             <field name="partner_id" position="attributes">
-                <attribute name="domain">[["id","in",so_partner_ids]]</attribute>
+                <attribute name="domain">[["id","in",so_partner_ids.id]]</attribute>
             </field>
 
 <!--
