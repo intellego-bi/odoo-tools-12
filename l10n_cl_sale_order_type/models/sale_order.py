@@ -41,10 +41,23 @@ class SaleOrder(models.Model):
 
     blanket_partner_ids = fields.Many2one('res.partner', 
                                   string='Partners from Blanket Order', 
-                                  compute='_get_partner_ids', 
-                                  readonly=False, 
+                                  compute='_compute_blanket_partner_ids', 
+                                  readonly=True, 
                                   store=True)
-                                                
+
+    @api.depends('blanket_id.partner_category_ids')
+    def _compute_blanket_partner_ids(self):
+        #self.env['res.partner'].invalidate_cache() 
+        customer_ids = []
+        for order in self:
+            customer_ids += self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', order.blanket_partner_category_ids.id)])
+        if len(customer_ids) == 0:
+            customer_ids = self.env['res.partner'].search([('customer', '=', True)])
+        if len(customer_ids) > 0:
+            return customer_ids
+        else:
+            return []
+                                  
     
     @api.multi
     @api.onchange('partner_id')
@@ -76,7 +89,7 @@ class SaleOrder(models.Model):
             
             
     @api.multi
-    @api.onchange('type_id', 'blanket_id')
+    @api.onchange('blanket_id')
     def onchange_blanket_id(self):
         for order in self:
             if order.blanket_id.sale_order_type_id:
@@ -93,20 +106,20 @@ class SaleOrder(models.Model):
                 order.blanket_partner_category_ids = order.blanket_id.partner_category_ids
                 #order.blanket_partner_ids = self._get_partner_ids()
 
-    @api.multi
-    @api.onchange('type_id', 'blanket_id', 'blanket_partner_category_ids')
-    def onchange_blanket_partner_category_ids(self):
-        customer_ids = []
-        for order in self:
-            #order.blanket_partner_ids = order._get_partner_ids()
-            customer_ids += self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', order.blanket_partner_category_ids.id)])
-        if len(customer_ids) == 0:
-            customer_ids = self.env['res.partner'].search([('customer', '=', True)])
-        if len(customer_ids) > 0:
-            order.blanket_partner_ids = customer_ids
-        else:
-            order.blanket_partner_ids = []
-           
+    #@api.multi
+    #@api.onchange('blanket_partner_category_ids')
+    #def onchange_blanket_partner_category_ids(self):
+    #    customer_ids = []
+    #    for order in self:
+    #        #order.blanket_partner_ids = order._get_partner_ids()
+    #        customer_ids += self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', order.blanket_partner_category_ids.id)])
+    #    if len(customer_ids) == 0:
+    #        customer_ids = self.env['res.partner'].search([('customer', '=', True)])
+    #    if len(customer_ids) > 0:
+    #        order.blanket_partner_ids = customer_ids
+    #    else:
+    #        order.blanket_partner_ids = []
+          
 
 
     @api.model
