@@ -46,29 +46,19 @@ class SaleOrder(models.Model):
                                                     column1='sale_order_blanket_id',
                                                     column2='category_id')
 
-    blanket_partner_ids = fields.Many2one('res.partner', string='Partners from Blanket Order',
-                                  compute='_get_partner_ids')    
+    blanket_partner_ids = fields.Many2one('res.partner', string='Partners from Blanket Order')
+                                  #compute='_get_partner_ids')    
                                   #compute='_compute_blanket_partner_ids', 
                                   #readonly=False, 
                                   #store=True
                                   #)
 
-    #@api.depends('blanket_partner_category_ids', 'blanket_id.partner_category_ids')
+    @api.depends('blanket_partner_category_ids')
     def _compute_blanket_partner_ids(self):
         #self.env['res.partner'].invalidate_cache() 
-        customer_ids = []
-        for order in self:
-            customer_ids += self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', order.blanket_partner_category_ids.id)])
-        if len(customer_ids) == 0:
-            customer_ids = self.env['res.partner'].search([('customer', '=', True)])
-        if len(customer_ids) > 0:
-            return customer_ids
-        else:
-            #raise ValidationError(_(
-            #        "No partners for category (%s) and blanket order (%s)") % (
-            #            self.blanket_partner_category_ids,
-            #            self.blanket_id))
-            return []
+        category_customer_ids = self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', order.blanket_partner_category_ids.id)])
+        self.blanket_partner_ids = category_customer_ids
+
                                   
     
     @api.multi
@@ -118,7 +108,7 @@ class SaleOrder(models.Model):
                 order.partner_id = order.blanket_id.partner_id.id
             if order.blanket_id.partner_category_ids:
                 order.blanket_partner_category_ids = order.blanket_id.partner_category_ids
-            order.blanket_partner_ids = self._search_blanket_partner_ids()
+            #order.blanket_partner_ids = self._search_blanket_partner_ids()
 
     #@api.multi
     #@api.onchange('blanket_partner_category_ids')
