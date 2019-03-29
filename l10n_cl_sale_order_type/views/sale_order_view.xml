@@ -6,9 +6,9 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
             <field name="validity_date" position="before">
-                <field name="type_id" required="1" can_create="false" can_write="false"/>
-                <field name="blanket_id" required="0" can_create="false" can_write="false"/>
-                <field name="blanket_partner_category_ids" string="Partner Categories" widget="many2many_tags"/>
+                <field name="type_id" required="1" can_create="false" can_write="false" attrs="{'readonly': [('state', 'not in', ('draft','cancel'))]}"/>
+                <field name="blanket_id" required="0" can_create="false" can_write="false" attrs="{'readonly': [('state', 'not in', ('draft','cancel'))]}"/>
+                <field name="blanket_partner_category_ids" string="Partner Categories" widget="many2many_tags" attrs="{'readonly': [('state', 'not in', ('draft','cancel'))]}"/>
             </field>
             <field name="blanket_id" position="attributes">
                 <attribute name="attrs">{"invisible": [["type_id","!=",1]]}</attribute>
@@ -16,13 +16,45 @@
                 <attribute name="attrs">{"required": [["type_id","=",2]]}</attribute>
             </field>
             <field name="blanket_partner_category_ids" position="attributes">
-                <!-- TODO: Categorás sólo visibles se existen en Blanket -->
+                <!-- TODO: FIELD category_ids sólo visible si existen en Blanket -->
                 <attribute name="attrs">{"invisible": [["type_id","=",1]]}</attribute>
             </field>
             <field name="partner_id" position="attributes">
-                <attribute name="domain">["&amp;",["customer","=",True],["category_id","in","blanket_partner_category_ids"]]</attribute>
+                <!-- TODO: DOMAIN de partner_id según Categorías en Blanket -->
+                <attribute name="domain">[["customer","=",True]]</attribute>
             </field>
-            
+
+<!--
+
+  Mejorar Layout PEDIDO
+
+  <xpath expr="//form[1]/sheet[1]/div[not(@name)][1]" position="after">
+    <group name="studio_group_vTt3y">
+      <group name="studio_group_vTt3y_left" string="TIpo de Pedido de Venta"/>
+    </group>
+  </xpath>
+  <xpath expr="//group[@name='studio_group_vTt3y_left']" position="inside">
+    <xpath expr="//field[@name='type_id']" position="move"/>
+  </xpath>
+  <xpath expr="//group[@name='studio_group_vTt3y']" position="inside">
+    <group name="studio_group_vTt3y_right" string="Pedido Marco"/>
+  </xpath>
+  <xpath expr="//group[@name='studio_group_vTt3y_right']" position="inside">
+    <xpath expr="//field[@name='blanket_id']" position="move"/>
+    <xpath expr="//field[@name='blanket_partner_category_ids']" position="move"/>
+  </xpath>
+  <xpath expr="//field[@name='partner_id']" position="attributes">
+    <attribute name="domain">["&amp;",["customer","=",True],["category_id.id","&gt;=",1]]</attribute>
+  </xpath>
+  <xpath expr="//field[@name='partner_shipping_id']" position="after">
+    <xpath expr="//field[@name='delivery_block_id']" position="move"/>
+  </xpath>
+  <xpath expr="//field[@name='type_id']" position="attributes">
+    <attribute name="widget">selection_badge</attribute>
+  </xpath>
+</data>
+
+-->            
         </field>
     </record>
 </odoo>
