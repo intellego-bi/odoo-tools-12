@@ -33,7 +33,7 @@ class SaleOrder(models.Model):
     blanket_partner_category_ids = fields.Many2many(string='Partner Categories',
                                                     related='blanket_id.partner_category_ids',
                                                     readonly=True, 
-                                                    store=False,
+                                                    store=True,
                                                     comodel_name='res.partner.category',
                                                     relation='cl_blanket_partner_category_rel',
                                                     column1='sale_order_blanket_id',
