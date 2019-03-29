@@ -40,3 +40,5 @@ class SaleOrderTypology(models.Model):
     payment_term_id = fields.Many2one('account.payment.term', 'Payment Term')
     pricelist_id = fields.Many2one('product.pricelist', 'Pricelist')
     incoterm_id = fields.Many2one('account.incoterms', 'Incoterm')
+    require_blanket = fields.Boolean('Require Blanket Order', default=False)
+
