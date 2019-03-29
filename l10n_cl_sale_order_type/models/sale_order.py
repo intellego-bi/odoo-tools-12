@@ -7,6 +7,7 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     def _get_partner_ids(self):
+        order.blanket_partner_ids.invalidate_cache()
         customers = self.env['res.partner'].search([('customer', '=', True)])   
         if self.blanket_partner_category_ids.id > 0:
             customers = self.env['res.partner'].search([('customer', '=', True), ('category_id', '=', self.blanket_partner_category_ids.id)])
@@ -36,7 +37,7 @@ class SaleOrder(models.Model):
                                   string='Partners from Blanket Order', 
                                   compute='_get_partner_ids', 
                                   readonly=True, 
-                                  store=True)
+                                  store=False)
                                                 
     
     @api.multi
@@ -91,7 +92,7 @@ class SaleOrder(models.Model):
     def onchange_blanket_partner_category_ids(self):
         for order in self:
             if order.blanket_partner_ids:
-                order.blanket_partner_ids.invalidate_cache()
+                #order.blanket_partner_ids.invalidate_cache()
                 order.blanket_partner_ids = self._get_partner_ids()
            
 
