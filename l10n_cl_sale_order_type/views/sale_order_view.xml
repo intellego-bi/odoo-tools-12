@@ -10,6 +10,7 @@
                 <field name="blanket_id" required="0" can_create="false" can_write="false"/>
                 <field name="blanket_partner_category_ids" string="Partner Categories" widget="many2many_tags" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                 <field name="dict_partner_category_ids" string="Partners for Categories" widget="many2many_tags" attrs="{'invisible': False}"/>
+                <field name="so_partner_ids" string="Partners by Categories" widget="many2many_tags" attrs="{'invisible': False}"/>
             </field>
             <field name="blanket_id" position="attributes">
                 <attribute name="attrs">{"invisible": [["type_id","=",1]], "readonly": [("state", "!=", "draft")]}</attribute>
