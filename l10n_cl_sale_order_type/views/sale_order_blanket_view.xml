@@ -80,6 +80,33 @@
         </field>
     </record>
 
+    <record id="cl_sale_order_blanket_kanban_view" model="ir.ui.view">
+        <field name="name">sale.order.blanket.kanban.view</field>
+        <field name="model">sale.order.blanket</field>
+        <field name="arch" type="xml">
+        
+            <kanban string="Blanket Sale Order">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_card_content">
+                                <field name="active" />
+                                <strong><field name="name" modifiers="{&quot;required&quot;: true}"/></strong>
+                                <div><small> REF  <strong><field name="external_order"/></strong></small></div>
+                                <div><small> Válido de <strong> <field name="date_from"/></strong> a <strong><field name="date_to"/></strong></small></div>
+                                <div><small> Tipo Pedido Venta <strong> <field name="sale_order_type_id" /></strong></small></div>
+                                <div><small> Lista de Precios <strong> <field name="pricelist_id" /></strong></small></div>
+                                <div><small> Etiquetas Clientes </small></div>
+                                <div><small><strong><field name="partner_category_ids" widget="many2many_tags"/></strong></small></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    
+    
     <record id="cl_sale_order_blanket_search_view" model="ir.ui.view">
         <field name="name">sale.order.blanket.search.view</field>
         <field name="model">sale.order.blanket</field>
@@ -115,13 +142,20 @@
     <record id="cl_sale_order_blanket_action" model="ir.actions.act_window">
         <field name="name">Blanket Sales Order</field>
         <field name="res_model">sale.order.blanket</field>
-        <field name="view_mode">form,tree</field>
+        <field name="view_mode">kanban,form,tree</field>
         <field name="view_id" ref="cl_sale_order_blanket_tree_view"/>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">Click to create a new Blanket sale order.</p>
         </field>
     </record>
 
+    <record id="cl_sale_order_blanket_action_kanban" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="cl_sale_order_blanket_kanban_view"/>
+        <field name="act_window_id" ref="cl_sale_order_blanket_action"/>
+    </record>
+    
     <record id="cl_sale_order_blanket_action_form" model="ir.actions.act_window.view">
         <field name="sequence" eval="2"/>
         <field name="view_mode">form</field>
@@ -130,12 +164,13 @@
     </record>
 
     <record id="cl_sale_order_blanket_action_tree" model="ir.actions.act_window.view">
-        <field name="sequence" eval="1"/>
+        <field name="sequence" eval="3"/>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="cl_sale_order_blanket_tree_view"/>
         <field name="act_window_id" ref="cl_sale_order_blanket_action"/>
     </record>
 
+    
     <menuitem id="cl_sale_order_blanket_menu" parent="sale.menu_sales_config"
               action="cl_sale_order_blanket_action" sequence="21"/>
 
