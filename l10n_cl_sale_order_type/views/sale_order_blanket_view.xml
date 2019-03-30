@@ -67,10 +67,11 @@
         <field name="model">sale.order.blanket</field>
         <field name="arch" type="xml">
             <tree string="Type">
-                <field name="active" />
+                <field name="active" widget="toggle_button"/>
                 <field name="name"/>
                 <field name="external_order"/>                
                 <field name="description" />
+                <field name="partner_category_ids" widget="many2many_tags"/>
                 <field name="partner_id" />
                 <field name="sale_order_type_id" />
                 <field name="pricelist_id" />
@@ -90,7 +91,7 @@
                     <t t-name="kanban-box">
                         <div t-attf-class="oe_kanban_card oe_kanban_global_click">
                             <div class="o_kanban_card_content">
-                                <field name="active" />
+                                <field name="active" widget="toggle_button"/>
                                 <strong><field name="name" modifiers="{&quot;required&quot;: true}"/></strong>
                                 <div><small> REF  <strong><field name="external_order"/></strong></small></div>
                                 <div><small> Válido de <strong> <field name="date_from"/></strong> a <strong><field name="date_to"/></strong></small></div>
@@ -112,7 +113,7 @@
         <field name="model">sale.order.blanket</field>
         <field name="arch" type="xml">
             <search string="Type">
-                <field name="active" />
+                <field name="active"/>
                 <field name="name"/>
                 <field name="external_order"/>                
                 <field name="description" />
