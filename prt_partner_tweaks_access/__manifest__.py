@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Partner Tweaks. Limit Restrict Configure Partner Contact Access Easily',
-    'version': '11.0.1.0',
+    'version': '13.0.1.0.0',
     'author': 'Ivan Sokolov',
     'category': 'Sales',
     'license': 'GPL-3',
