@@ -40,7 +40,7 @@ class PRTUsers(models.Model):
             rules.sudo().write({'active': False})
 
 # -- Write. Clear caches if related vals changed
-    @api.multi
+    # @api.multi
     def write(self, vals):
         super(PRTUsers, self).write(vals)
         if 'allowed_partner_category_ids' in vals or 'allowed_country_ids' in vals or 'allowed_country_state_ids' in vals:
